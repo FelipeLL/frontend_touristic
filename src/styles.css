@@ -1,0 +1,94 @@
+.btn-toggle {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
+  font-weight: 600;
+  color: rgba(0, 168, 14, 0.65);
+  background-color: transparent;
+  border: 0;
+}
+/* .btn-toggle:hover,
+.btn-toggle:focus {
+  color: rgba(0, 0, 0, 0.85);
+  background-color: #d2f4ea;
+} */
+
+.btn-toggle::before {
+  width: 1.25em;
+  line-height: 0;
+  content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%280,0,0,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+  transition: transform 0.35s ease;
+  transform-origin: 0.5em 50%;
+}
+
+.btn-toggle[aria-expanded="true"] {
+  color: rgba(0, 0, 0, 0.85);
+}
+.btn-toggle[aria-expanded="true"]::before {
+  transform: rotate(90deg);
+}
+
+.btn-toggle-nav a {
+  display: inline-flex;
+  padding: 0.1875rem 0.5rem;
+  margin-top: 0.125rem;
+  margin-left: 1.25rem;
+  text-decoration: none;
+}
+
+.btn-toggle-nav a:hover,
+.btn-toggle-nav a:focus {
+  background-color: #c2c2c2;
+}
+
+/* Styles de LOGIN */
+
+/*Defnir variables de color para usar mas adelante*/
+:root {
+  --dark: #16191c;
+  --dark-x: #1e2126;
+  --lightcyan: #add8e6;
+  --light: #ffffff;
+}
+
+/*definimos el color de fondo*/
+body {
+  font-family: "Spartan", sans-serif;
+  font-weight: 300;
+  color: var(black);
+}
+
+/*modifcar clase bootstrap del color de fondo
+  importando el color definido en root y sobreescribirlo con important*/
+.bg-info {
+  background-color: var(--lightcyan) !important;
+}
+.bg-dark-x {
+  background-color: var(--dark-x) !important;
+} /*importar clase bg-dark-x llamada en el index*/
+
+.form-control .btn {
+  min-height: 3.125rem;
+  line-height: initial;
+}
+
+.img-1 {
+  /*Propiedades de la imagen 1 del primer slider*/
+  background-image: url("./images/r1.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.img-2 {
+  /*Propiedades de la imagen 1 del primer slider*/
+  background-image: url("./images/g2.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.img-3 {
+  /*Propiedades de la imagen 1 del primer slider*/
+  background-image: url("./images/g3.jpg");
+  background-size: cover;
+  background-position: center;
+}
