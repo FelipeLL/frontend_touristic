@@ -1,13 +1,14 @@
+import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.js";
+import "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css";
 import { useControl } from "react-map-gl";
-import mapboxgl from "mapbox-gl";
-import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
-import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 
 const TOKEN =
   "pk.eyJ1IjoiamZlbGlwZWxhZGlubyIsImEiOiJjbDFmbHF1dzUwMXo1M2JudDQwNjVoNWw3In0.wiRr4CxecJHGtM18meygeQ";
 
-export default function GeocoderControl({ estacionesGeoJSON }) {
+export default function DirectionsControl({ estacionesGeoJSON }) {
+  console.log(estacionesGeoJSON);
   function forwardGeocoder(query) {
+    console.log(query);
     var matchingFeatures = [];
     for (var i = 0; i < estacionesGeoJSON.features.length; i++) {
       var feature = estacionesGeoJSON.features[i];
@@ -27,15 +28,27 @@ export default function GeocoderControl({ estacionesGeoJSON }) {
     }
     return matchingFeatures;
   }
-  const geocoder = useControl(() => {
-    const ctrl = new MapboxGeocoder({
+
+  const directions = useControl(() => {
+    const ctrl = new MapboxDirections({
       accessToken: TOKEN,
-      localGeocoder: forwardGeocoder,
-      localGeocoderOnly: true,
-      mapboxgl: mapboxgl,
-      placeholder: "Busque aquí",
+      unit: "metric",
+      profile: "mapbox/walking",
+      language: "es-MX",
+      interactive: true,
+      placeholderOrigin: "Elige un lugar de inicio",
+      placeholderDestination: "Elige el destino",
+      geocoder: {
+        proximity: [-74.3564647, 4.290859],
+        country: "co",
+        // localGeocoder: forwardGeocoder,
+      },
     });
 
+    /* ctrl.setOrigin([-74.453816, 4.213004]);
+    ctrl.setDestination([-74.209108, 4.378892]); */
+    ctrl.addWaypoint(0, [-74.453816, 4.213004]);
+    ctrl.removeRoutes();
     return ctrl;
   });
 

@@ -1,5 +1,5 @@
 import React from "react";
-import "../registerStyles.css";
+// import "../registerStyles.css";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +8,6 @@ const Register = () => {
   const initialState = {
     nombre: "",
     apellido: "",
-    direccion: "",
     telefono: "",
     correo: "",
     password: "",
@@ -24,7 +23,6 @@ const Register = () => {
     if (
       !nombre.trim() ||
       !apellido.trim() ||
-      !direccion.trim() ||
       !telefono.trim() ||
       !correo.trim() ||
       !password.trim()
