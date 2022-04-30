@@ -1,4 +1,4 @@
-// import "../styles.css";
+import "../styles.css";
 import img_1 from "../images/r1.jpg";
 import logo from "../images/logo-final_opt.svg";
 import { useContext, useEffect, useState } from "react";

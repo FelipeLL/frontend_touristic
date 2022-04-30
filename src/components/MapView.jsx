@@ -102,19 +102,19 @@ const MapView = () => {
           color="#000"
           onClick={() => setSlider(!slider)}
         />
-        <Slider slider={slider} />
+        {/* <Slider slider={slider} /> */}
         {/* {slider && <Slider />} */}
         {/* <Source id="estaciones" type="geojson" data={estacionesGeoJSON}>
           <Layer {...layerStyle} />
         </Source> */}
-        {data.length !== 0 ? (
+        {/* {data.length !== 0 ? (
           <>
-            {/* <GeocoderControl estacionesGeoJSON={estacionesGeoJSON} /> */}
-            {/* <DirectionsControl estacionesGeoJSON={estacionesGeoJSON} /> */}
+            <GeocoderControl estacionesGeoJSON={estacionesGeoJSON} />
+            <DirectionsControl estacionesGeoJSON={estacionesGeoJSON} />
           </>
         ) : (
           console.log("no hay datos")
-        )}
+        )} */}
         {/* <GeocoderControl estacionesGeoJSON={estacionesGeoJSON} /> */}
       </Map>
     </>
