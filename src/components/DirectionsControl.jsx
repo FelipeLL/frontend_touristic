@@ -6,9 +6,7 @@ const TOKEN =
   "pk.eyJ1IjoiamZlbGlwZWxhZGlubyIsImEiOiJjbDFmbHF1dzUwMXo1M2JudDQwNjVoNWw3In0.wiRr4CxecJHGtM18meygeQ";
 
 export default function DirectionsControl({ estacionesGeoJSON }) {
-  console.log(estacionesGeoJSON);
   function forwardGeocoder(query) {
-    console.log(query);
     var matchingFeatures = [];
     for (var i = 0; i < estacionesGeoJSON.features.length; i++) {
       var feature = estacionesGeoJSON.features[i];

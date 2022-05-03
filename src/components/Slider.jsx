@@ -1,6 +1,5 @@
-import { useState } from "react";
-// import "../style.css";
-import imagen1 from "../images/g2.jpg";
+import "../style.css";
+import Station from "./Station";
 
 const Slider = ({ slider }) => {
   return (
@@ -13,10 +12,8 @@ const Slider = ({ slider }) => {
             : "sidebar flex-center left collapsed"
         }
       >
-        <div className="sidebar-content rounded-rect flex-center">
-          Left Sidebar
-          <img src={imagen1} alt="" />
-          <div className="sidebar-toggle rounded-rect left">&rarr;</div>
+        <div className="sidebar-content rounded-rect ">
+          <Station />
         </div>
       </div>
     </>

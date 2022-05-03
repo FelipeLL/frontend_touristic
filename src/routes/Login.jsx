@@ -1,8 +1,9 @@
+import styles from "../login.module.css";
 import "../styles.css";
-import img_1 from "../images/r1.jpg";
+// import img_1 from "../images/r1.jpg";
 import logo from "../images/logo-final_opt.svg";
 import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "../context/UserProvider";
 
@@ -106,12 +107,10 @@ const Login = () => {
                 data-bs-interval="3000"
               >
                 <div className="carousel-caption d-none d-md-block">
-                  <h5 className="font-weight-bold">
-                    Descubre algo sorprendete
-                  </h5>
+                  <h5 className="fw-bold">Descubre algo sorprendete</h5>
                   <a href="#" className="text-muted text-decoration-none">
                     {" "}
-                    <i className="fa-light fa-location-check"></i>Descarga
+                    <i className="fa-light fa-location-check "></i>Descarga
                     nuestra app
                   </a>
                 </div>
@@ -191,63 +190,53 @@ const Login = () => {
             </h1>
 
             {/* <!--Formulario de ingreso--> */}
-            <form className="mb-5" onSubmit={handleSubmit}>
-              <div className="mb-4">
-                <label
-                  htmlFor="exampleInputEmail1"
-                  className="form-label font-weight-bolds text-dark-x"
-                >
-                  Email
-                </label>
-                {/* <!--clase bg-dark en los inputs de los formularios - border-0 quitar borde - placeholder añadir texto dentro--> */}
+
+            <form className={styles.form} onSubmit={handleSubmit}>
+              <label htmlFor="exampleInputEmail1" className={styles.text}>
+                Correo electronico
+              </label>
+
+              <div className={styles["input-box"]}>
                 <input
-                  type="email"
-                  className="form-control bg-gray border-0 text-dark-x"
-                  placeholder="Ingresa tu email"
+                  className={styles.input}
+                  type="text"
                   id="exampleInputEmail1"
+                  placeholder="Ingresa tu correo electrónico"
                   name="email"
                   onChange={handleChange}
-                  aria-describedby="emailHelp"
                 />
               </div>
-              <div className="mb-4">
-                <label
-                  htmlFor="exampleInputPassword1"
-                  className="form-label font-weight-bold text-gray"
-                >
-                  Contraseña
-                </label>
-                {/* <!--clase bg-dark en los inputs de los formularios - border-0 quitar borde - placeholder añadir texto dentro--> */}
+              <label htmlFor="exampleInputEmail2" className={styles.text}>
+                Contraseña
+              </label>
+              <div className={styles["input-box"]}>
                 <input
+                  className={styles.input}
                   type="password"
-                  className="form-control bg-gray border-0 text-dark-x"
+                  id="exampleInputEmail2"
                   placeholder="Ingresa tu contraseña"
-                  id="exampleInputPassword1"
                   name="password"
                   onChange={handleChange}
                 />
-
-                <a
-                  href="#"
-                  id="emailHelp"
-                  className="form-text text-muted text-decoration-none"
-                >
-                  ¿Has olvidado tu contraseña?
-                </a>
-                {/* <!--seccion olvidaste tu CONTRASEÑA--> */}
+              </div>
+              <div className={styles["text"]}>
+                <h6>
+                  ¿Olvidaste tu contraseña?{" "}
+                  <a href="#" className={styles["text-a"]}>
+                    Recuperala
+                  </a>
+                </h6>
               </div>
 
-              <button type="submit" className="btn btn-primary w-100">
-                Iniciar Sesion
-              </button>
-              {/* <!--Boton iniciar sesion -- w-100 abarque todo el form--> */}
+              <div className={styles["input-box"]}>
+                <button className={styles.button}>Iniciar Sesión</button>
+              </div>
             </form>
             {/* <!--Seccion O inicia sesion--> */}
             {/* <p class="font-weight-bold text-center text-muted">O inicia sesion con</p> <!--text-center para centrar el texto--> */}
 
-            <div className="d-flex justify-content-around">
-              {/* <!--SECCION BOTONES FACEBOOK Y GOOGLE
-            centrar y mantener distancia por defecto =justify-content-around --> */}
+            {/* <div className="d-flex justify-content-around">
+              
 
               <button
                 type="submit"
@@ -264,7 +253,7 @@ const Login = () => {
                 {" "}
                 <i className="fa-brands fa-facebook lead mr-2"></i> Facebook
               </button>
-            </div>
+            </div> */}
           </div>
 
           <div className="text-center px-lg-5 pt-lg-3 pb-lg-4 p-4 w-100 mt-auto">
@@ -272,14 +261,10 @@ const Login = () => {
             <p className="d-inline-block mb-0 ">
               ¿Todavia no tienes una cuenta?
             </p>
-            <a
-              href="#"
-              className="text-dark-x font-weight-bold 
-            text-decoration-none"
-            >
+            <Link to="/register" className={styles["text-a"]}>
               {" "}
               Crea una ahora
-            </a>
+            </Link>
           </div>
         </div>
       </div>

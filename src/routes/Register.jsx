@@ -1,8 +1,7 @@
-import React from "react";
-// import "../registerStyles.css";
+import styles from "../register.module.css";
 import axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 const Register = () => {
   const URI = "http://localhost:5000/users/register";
   const initialState = {
@@ -43,70 +42,72 @@ const Register = () => {
   };
 
   return (
-    <>
-      <div className="container-form sign-up">
-        <form className="formulario" onSubmit={handleSubmit}>
-          <h2 className="create-account">Bienvenido</h2>
-          <div className="iconos">
-            <div className="border-icon">
-              <i className="bx bxl-instagram"></i>
-            </div>
-            <div className="border-icon">
-              <i className="bx bxl-linkedin"></i>
-            </div>
-            <div className="border-icon">
-              <i className="bx bxl-facebook-circle"></i>
-            </div>
+    <div className={styles.body}>
+      <div className={styles.wrapper}>
+        <h2 className={styles["titulo-h2"]}>Registrarse</h2>
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <div className={styles["input-box"]}>
+            <input
+              className={styles.input}
+              type="text"
+              placeholder="Nombre"
+              name="nombre"
+              onChange={handleChange}
+              value={nombre}
+            />
           </div>
-          <p className="cuenta-gratis">Crea una cuenta, es gratis!</p>
-          <input
-            type="text"
-            className="form-control bg-light border-0 text-dark-x"
-            placeholder="Nombre"
-            name="nombre"
-            onChange={handleChange}
-            value={nombre}
-          />
-          <input
-            type="text"
-            className="form-control bg-light border-0 text-dark-x"
-            placeholder="Apellido"
-            name="apellido"
-            onChange={handleChange}
-            value={apellido}
-          />
+          <div className={styles["input-box"]}>
+            <input
+              className={styles.input}
+              type="text"
+              placeholder="Apellido"
+              name="apellido"
+              onChange={handleChange}
+              value={apellido}
+            />
+          </div>
+          <div className={styles["input-box"]}>
+            <input
+              className={styles.input}
+              type="text"
+              placeholder="Teléfono"
+              name="telefono"
+              onChange={handleChange}
+              value={telefono}
+            />
+          </div>
+          <div className={styles["input-box"]}>
+            <input
+              className={styles.input}
+              type="text"
+              placeholder="Correo electrónico"
+              name="correo"
+              onChange={handleChange}
+              value={correo}
+            />
+          </div>
+          <div className={styles["input-box"]}>
+            <input
+              className={styles.input}
+              type="password"
+              placeholder="Contraseña"
+              name="password"
+              onChange={handleChange}
+              value={password}
+            />
+          </div>
 
-          <input
-            type="tel"
-            className="form-control"
-            placeholder="Teléfono"
-            name="telefono"
-            onChange={handleChange}
-            value={telefono}
-          />
-          <input
-            type="email"
-            className="form-control bg-light border-0 text-dark-x"
-            placeholder="Correo electrónico"
-            id="exampleInputEmail1"
-            name="correo"
-            aria-describedby="emailHelp"
-            onChange={handleChange}
-            value={correo}
-          />
-          <input
-            type="password"
-            className="form-control bg-light border-0 text-dark-x"
-            placeholder="Ingresa una contraseña"
-            id="exampleInputPassword1"
-            name="password"
-            onChange={handleChange}
-            value={password}
-          />
-          <button type="submit">Registrarse</button>
+          <div className={styles["input-box"]}>
+            <button className={styles.button}>Registrarse</button>
+          </div>
         </form>
+        <p className="d-inline-block mb-0 ">¿Ya tienes una cuenta?</p>
+        <Link to="/" className={styles["text-a"]}>
+          {" "}
+          Inicia sesión
+        </Link>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -1,12 +1,12 @@
 import React, { useState, useMemo, useEffect } from "react";
-import Map, { Marker, Source, Layer } from "react-map-gl";
+import Map, { Marker } from "react-map-gl";
 //import mapboxgl from "mapbox-gl";
 import axios from "axios";
 import { point } from "@turf/helpers";
 import GeocoderControl from "./GeocoderControl";
 import DirectionsControl from "./DirectionsControl";
 import Slider from "./Slider";
-import iconMarker from "../images/icons8-html-5.svg";
+import Admin from "./Admin";
 const MapView = () => {
   //estado inicial de la vista
   const initialState = {
@@ -28,7 +28,6 @@ const MapView = () => {
   const [viewState, setViewState] = useState(initialState);
   const [slider, setSlider] = useState(false);
   const [data, setData] = useState([]);
-  const [isActive, setActive] = useState(false);
 
   //establecen los limites del mapa
   const bounds = [
@@ -66,15 +65,6 @@ const MapView = () => {
     };
   }, [data]);
 
-  const layerStyle = {
-    id: "point",
-    type: "circle",
-    paint: {
-      "circle-radius": 10,
-      "circle-color": "#000",
-    },
-  };
-
   return (
     <>
       <Map
@@ -89,7 +79,7 @@ const MapView = () => {
           bottom: "0",
           top: "0",
         }}
-        // maxBounds={bounds}
+        maxBounds={bounds}
         mapboxAccessToken="pk.eyJ1IjoiamZlbGlwZWxhZGlubyIsImEiOiJjbDFmbmc2MGIwMGFhM2NxYjNkMjJnNHl6In0.4DpT3U9E6A9nzbxdb_6vHg"
         mapStyle="mapbox://styles/jfelipeladino/cl1yho734000414o5b4b0j9xe"
       >
@@ -102,19 +92,20 @@ const MapView = () => {
           color="#000"
           onClick={() => setSlider(!slider)}
         />
-        {/* <Slider slider={slider} /> */}
-        {/* {slider && <Slider />} */}
+        <Slider slider={slider} />
+        <Admin />
+
         {/* <Source id="estaciones" type="geojson" data={estacionesGeoJSON}>
           <Layer {...layerStyle} />
         </Source> */}
-        {/* {data.length !== 0 ? (
+        {data.length !== 0 ? (
           <>
             <GeocoderControl estacionesGeoJSON={estacionesGeoJSON} />
             <DirectionsControl estacionesGeoJSON={estacionesGeoJSON} />
           </>
         ) : (
           console.log("no hay datos")
-        )} */}
+        )}
         {/* <GeocoderControl estacionesGeoJSON={estacionesGeoJSON} /> */}
       </Map>
     </>
