@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "../style.css";
 import Navbar from "./Navbar";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGear } from "@fortawesome/free-solid-svg-icons";
 const Admin = () => {
   const [active, setActive] = useState(false);
 
@@ -24,7 +26,7 @@ const Admin = () => {
             className="sidebar-toggle rounded-rect right "
             onClick={activeSlider}
           >
-            &larr;
+            <FontAwesomeIcon icon={faGear} style={{ color: "#46afff" }} />
           </div>
         </div>
       </div>

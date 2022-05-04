@@ -11,6 +11,7 @@ const AddStation = () => {
   const URI = "http://localhost:5000/estaciones";
 
   const [estacion, setEstacion] = useState(initialState);
+  const [file, setFile] = useState(null);
 
   const { nombre, descripcion, longitud, latitud } = estacion;
   const handleSubmit = async (e) => {
@@ -19,8 +20,22 @@ const AddStation = () => {
       console.log("Complete todos los campos");
       return;
     }
+
+    /*  const formdata = new FormData();
+    formdata.append("image", file);
+
+    const image = await axios.post(
+      "http://localhost:5000/estaciones/image",
+      formdata
+    );
+
+    setFile(null); */
+
     const res = await axios.post(URI, estacion);
-    console.log(estacion);
+  };
+
+  const selectedHandle = (e) => {
+    setFile(e.target.files[0]);
   };
 
   const handleChange = (e) => {
@@ -61,7 +76,7 @@ const AddStation = () => {
             <div className={styles["input-box"]}>
               <input
                 className={styles.input}
-                type="number"
+                type="text"
                 id="exampleInputEmail1"
                 name="longitud"
                 onChange={handleChange}
@@ -75,7 +90,7 @@ const AddStation = () => {
             <div className={styles["input-box"]}>
               <input
                 className={styles.input}
-                type="number"
+                type="text"
                 id="exampleInputEmail2"
                 name="latitud"
                 onChange={handleChange}
@@ -99,6 +114,13 @@ const AddStation = () => {
                 onChange={handleChange}
               />
             </div>
+            {/* <div className="container mt-5">
+              <input
+                type="file"
+                className="form-control"
+                onChange={selectedHandle}
+              />
+            </div> */}
           </div>
         </div>
 

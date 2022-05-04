@@ -93,7 +93,7 @@ const UpdateStation = () => {
             <div className={styles["input-box"]}>
               <input
                 className={styles.input}
-                type="number"
+                type="text"
                 id="exampleInputEmail1"
                 name="longitud"
                 onChange={handleChange}
@@ -107,7 +107,7 @@ const UpdateStation = () => {
             <div className={styles["input-box"]}>
               <input
                 className={styles.input}
-                type="number"
+                type="text"
                 id="exampleInputEmail2"
                 name="latitud"
                 onChange={handleChange}

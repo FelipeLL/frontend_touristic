@@ -1,12 +1,13 @@
 import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.js";
 import "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css";
 import { useControl } from "react-map-gl";
+import { useEffect } from "react";
 
 const TOKEN =
   "pk.eyJ1IjoiamZlbGlwZWxhZGlubyIsImEiOiJjbDFmbHF1dzUwMXo1M2JudDQwNjVoNWw3In0.wiRr4CxecJHGtM18meygeQ";
 
-export default function DirectionsControl({ estacionesGeoJSON }) {
-  function forwardGeocoder(query) {
+export default function DirectionsControl({ geoLocation, indications }) {
+  /*  function forwardGeocoder(query) {
     var matchingFeatures = [];
     for (var i = 0; i < estacionesGeoJSON.features.length; i++) {
       var feature = estacionesGeoJSON.features[i];
@@ -25,7 +26,13 @@ export default function DirectionsControl({ estacionesGeoJSON }) {
       }
     }
     return matchingFeatures;
-  }
+  } */
+
+  // console.log(geoLocation ? geoLocation.longitude : "vacio");
+
+  // useEffect(() => {
+  //   console.log("asd");
+  // }, [indications]);
 
   const directions = useControl(() => {
     const ctrl = new MapboxDirections({
@@ -43,10 +50,12 @@ export default function DirectionsControl({ estacionesGeoJSON }) {
       },
     });
 
-    /* ctrl.setOrigin([-74.453816, 4.213004]);
-    ctrl.setDestination([-74.209108, 4.378892]); */
-    ctrl.addWaypoint(0, [-74.453816, 4.213004]);
-    ctrl.removeRoutes();
+    ctrl.setOrigin([geoLocation.longitude, geoLocation.latitude]);
+
+    // ctrl.setDestination([-74.209108, 4.378892]);
+    // ctrl.addWaypoint(0, [-74.453816, 4.213004]);
+    // ctrl.removeRoutes();
+
     return ctrl;
   });
 

@@ -1,7 +1,7 @@
 import "../style.css";
 import Station from "./Station";
 
-const Slider = ({ slider }) => {
+const Slider = ({ slider, setSlider, estacion, data }) => {
   return (
     <>
       <div
@@ -13,7 +13,7 @@ const Slider = ({ slider }) => {
         }
       >
         <div className="sidebar-content rounded-rect ">
-          <Station />
+          <Station estacion={estacion} data={data} setSlider={setSlider} />
         </div>
       </div>
     </>
