@@ -1,5 +1,5 @@
 import styles from "../login.module.css";
-import "../styles.css";
+import "../style.css";
 // import img_1 from "../images/r1.jpg";
 import logo from "../images/logo-final_opt.svg";
 import { useContext, useEffect, useState } from "react";
@@ -108,11 +108,6 @@ const Login = () => {
               >
                 <div className="carousel-caption d-none d-md-block">
                   <h5 className="fw-bold">Descubre algo sorprendete</h5>
-                  <a href="#" className="text-muted text-decoration-none">
-                    {" "}
-                    <i className="fa-light fa-location-check "></i>Descarga
-                    nuestra app
-                  </a>
                 </div>
               </div>
               {/* <!--IMAGEN 2--> */}
@@ -124,9 +119,6 @@ const Login = () => {
                   <h5 className="font-weight-bold">
                     Descubre algo sorprendete
                   </h5>
-                  <a href="#" className="text-muted text-decoration-none">
-                    Descarga nuestra app
-                  </a>
                 </div>
               </div>
               {/* <!--IMAGEN 3--> */}
@@ -138,11 +130,6 @@ const Login = () => {
                   <h5 className="font-weight-bold">
                     Descubre algo sorprendete
                   </h5>
-                  <a href="#" className="text-muted text-decoration-none">
-                    {" "}
-                    <i className="fa-light fa-location-check"></i>Descarga
-                    nuestra app
-                  </a>
                 </div>
               </div>
             </div>
@@ -219,14 +206,14 @@ const Login = () => {
                   onChange={handleChange}
                 />
               </div>
-              <div className={styles["text"]}>
+              {/* <div className={styles["text"]}>
                 <h6>
                   ¿Olvidaste tu contraseña?{" "}
                   <a href="#" className={styles["text-a"]}>
                     Recuperala
                   </a>
                 </h6>
-              </div>
+              </div> */}
 
               <div className={styles["input-box"]}>
                 <button className={styles.button}>Iniciar Sesión</button>

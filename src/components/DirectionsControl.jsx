@@ -1,7 +1,6 @@
 import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.js";
 import "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css";
 import { useControl } from "react-map-gl";
-import { useEffect } from "react";
 
 const TOKEN =
   "pk.eyJ1IjoiamZlbGlwZWxhZGlubyIsImEiOiJjbDFmbHF1dzUwMXo1M2JudDQwNjVoNWw3In0.wiRr4CxecJHGtM18meygeQ";
@@ -48,9 +47,12 @@ export default function DirectionsControl({ geoLocation, indications }) {
         country: "co",
         // localGeocoder: forwardGeocoder,
       },
+      controls: {
+        instructions: false,
+      },
     });
 
-    ctrl.setOrigin([geoLocation.longitude, geoLocation.latitude]);
+    //ctrl.setOrigin([geoLocation.longitude, geoLocation.latitude]);
 
     // ctrl.setDestination([-74.209108, 4.378892]);
     // ctrl.addWaypoint(0, [-74.453816, 4.213004]);

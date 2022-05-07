@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import styles from "../deleteStation.module.css";
 import axios from "axios";
+import { UserContext } from "../context/UserProvider";
 const DeleteStation = () => {
+  const { upload, setUpload } = useContext(UserContext);
   useEffect(() => {
     const axiosData = async () => {
       const URI = "http://localhost:5000/estaciones";
@@ -9,7 +11,7 @@ const DeleteStation = () => {
       setData(res.data);
     };
     axiosData();
-  }, []);
+  }, [upload]);
 
   const [data, setData] = useState([]);
   const [estaciones, setEstaciones] = useState({
@@ -24,6 +26,7 @@ const DeleteStation = () => {
     const res = await axios.delete(
       `http://localhost:5000/estaciones/${estaciones.estacion}`
     );
+    setUpload(true);
     console.log("eliminado");
   };
   const handleChange = (e) => {

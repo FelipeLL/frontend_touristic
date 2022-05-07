@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
+import { UserContext } from "../context/UserProvider";
 import styles from "../updateStation.module.css";
 import axios from "axios";
 const AddStation = () => {
@@ -8,12 +9,13 @@ const AddStation = () => {
     longitud: "",
     latitud: "",
   };
+
   const URI = "http://localhost:5000/estaciones";
 
-  const [estacion, setEstacion] = useState(initialState);
-  const [file, setFile] = useState(null);
+  const [estaciones, setEstaciones] = useState(initialState);
+  const { upload, setUpload } = useContext(UserContext);
 
-  const { nombre, descripcion, longitud, latitud } = estacion;
+  const { nombre, longitud, latitud } = estaciones;
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!longitud.trim() || !latitud.trim() || !nombre.trim()) {
@@ -21,26 +23,14 @@ const AddStation = () => {
       return;
     }
 
-    /*  const formdata = new FormData();
-    formdata.append("image", file);
-
-    const image = await axios.post(
-      "http://localhost:5000/estaciones/image",
-      formdata
-    );
-
-    setFile(null); */
-
-    const res = await axios.post(URI, estacion);
-  };
-
-  const selectedHandle = (e) => {
-    setFile(e.target.files[0]);
+    const res = await axios.post(URI, estaciones);
+    setUpload(true);
+    console.log("estación agregada");
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setEstacion((old) => ({
+    setEstaciones((old) => ({
       ...old,
       [name]: value,
     }));
@@ -48,7 +38,7 @@ const AddStation = () => {
 
   return (
     <>
-      <h3 className="my-5 text-center">Añadir estación</h3>
+      <h3 className="my-4 text-center">Añadir estación</h3>
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className="row">
           <div className="col-12">
@@ -114,17 +104,10 @@ const AddStation = () => {
                 onChange={handleChange}
               />
             </div>
-            {/* <div className="container mt-5">
-              <input
-                type="file"
-                className="form-control"
-                onChange={selectedHandle}
-              />
-            </div> */}
           </div>
         </div>
 
-        <div className={styles["input-box"]}>
+        <div className={styles["input-box-2"]}>
           <button type="submit" className={styles.button}>
             Agregar
           </button>

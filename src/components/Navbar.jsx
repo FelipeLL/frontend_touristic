@@ -33,16 +33,16 @@ const Navbar = ({ active, setActive }) => {
   return (
     <>
       <nav className={styles.navigator}>
-        <a href="#" onClick={viewAddStation}>
+        <a href="#" onClick={viewAddStation} className={styles.a}>
           Agregar
         </a>
-        <a href="#" onClick={viewDeleteStation}>
+        <a href="#" onClick={viewDeleteStation} className={styles.a}>
           Eliminar
         </a>
-        <a href="#" onClick={viewUpdateStation}>
+        <a href="#" onClick={viewUpdateStation} className={styles.a}>
           Actualizar
         </a>
-        <a href="#" onClick={closeWindow}>
+        <a href="#" onClick={closeWindow} className={styles.cerrar}>
           <FontAwesomeIcon icon={faCircleXmark} style={{ fontSize: "1.5em" }} />
         </a>
       </nav>

@@ -6,10 +6,6 @@
   height: 52px;
   margin: 5px 0;
 }
-.input-box-2 {
-  height: 52px;
-  margin: 5px 0;
-}
 
 .input {
   height: 90%;
@@ -24,10 +20,6 @@
   border-bottom-width: 2.5px;
   border-radius: 6px;
   transition: all 0.3s ease;
-}
-
-.nombre {
-  width: 96%;
 }
 
 .textArea {
@@ -80,37 +72,7 @@
   text-decoration: none;
   color: #1a83e6;
 }
-.imagen-texto {
-  margin-top: 40px;
-}
 
 .text-a:hover {
   text-decoration: underline;
-}
-
-@media screen and (max-height: 680px) {
-  .form {
-    margin-top: 5px;
-  }
-  .input-box {
-    height: 32px;
-    margin: 5px 0;
-  }
-  .input-box-2 {
-    height: 42px;
-    margin: 1px 0;
-  }
-  .text {
-    font-size: 15px;
-  }
-  .textArea {
-    height: 40px;
-  }
-  .imagen-texto {
-    margin-top: 10px;
-  }
-  .button {
-    margin-top: 15px;
-    font-size: 20px;
-  }
 }

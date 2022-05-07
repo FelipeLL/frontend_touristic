@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect, useContext } from "react";
 import Map, { Marker, GeolocateControl } from "react-map-gl";
 import axios from "axios";
 import { point } from "@turf/helpers";
@@ -7,23 +7,24 @@ import DirectionsControl from "./DirectionsControl";
 import Slider from "./Slider";
 import Admin from "./Admin";
 import { UserContext } from "../context/UserProvider";
-import { useContext } from "react";
+import Logout from "./Logout";
 const MapView = () => {
   //estado inicial de la vista
   const initialState = {
-    longitude: -74.3564647,
-    latitude: 4.290859,
+    longitude: -74.3464647,
+    latitude: 4.311859,
     zoom: 13,
   };
-
+  const { upload, setUpload } = useContext(UserContext);
   useEffect(() => {
     const axiosData = async () => {
       const URI = "http://localhost:5000/estaciones";
       const res = await axios.get(URI);
       setData(res.data);
+      setUpload(false);
     };
     axiosData();
-  }, []);
+  }, [upload]);
 
   //establecer vista
   const [viewState, setViewState] = useState(initialState);
@@ -31,12 +32,12 @@ const MapView = () => {
   const [data, setData] = useState([]);
   const [geoLocation, setGeoLocation] = useState({});
   const { indications, setIndications } = useContext(UserContext);
-  const [estacion, setEstacion] = useState(-1);
+  const [estacion, setEstacion] = useState(0);
 
   //establecen los limites del mapa
   const bounds = [
     [-74.453816, 4.213004], //Southwest coords
-    [-74.209108, 4.378892], //Northeast coords
+    [-74.209108, 4.478892], //Northeast coords
   ];
 
   //representar los marcadores en la misma posición de cada punto
@@ -70,14 +71,14 @@ const MapView = () => {
     };
   }, [data]);
 
-  const geolocateControlRef = React.useCallback((ref) => {
+  /* const geolocateControlRef = React.useCallback((ref) => {
     if (ref) {
-      // Activate as soon as the control is loaded
+      
       setTimeout(function () {
         ref.trigger();
       }, 100);
     }
-  }, []);
+  }, []); */
 
   return (
     <>
@@ -91,7 +92,7 @@ const MapView = () => {
           bottom: "0",
           top: "0",
         }}
-        // maxBounds={bounds}
+        maxBounds={bounds}
         mapboxAccessToken="pk.eyJ1IjoiamZlbGlwZWxhZGlubyIsImEiOiJjbDFmbmc2MGIwMGFhM2NxYjNkMjJnNHl6In0.4DpT3U9E6A9nzbxdb_6vHg"
         mapStyle="mapbox://styles/jfelipeladino/cl1yho734000414o5b4b0j9xe"
       >
@@ -111,6 +112,7 @@ const MapView = () => {
           data={data}
         />
         <Admin />
+        {/* <User /> */}
 
         {data.length !== 0 ? (
           <>
@@ -119,14 +121,14 @@ const MapView = () => {
               estacionesGeoJSON={estacionesGeoJSON}
               geoLocation={geoLocation}
             /> */}
-
-            {Object.keys(geoLocation).length !== 0 && (
-              <DirectionsControl
-                estacionesGeoJSON={estacionesGeoJSON}
-                geoLocation={geoLocation}
-                indications={indications}
-              />
-            )}
+            <DirectionsControl
+              estacionesGeoJSON={estacionesGeoJSON}
+              geoLocation={geoLocation}
+              indications={indications}
+            />
+            {/* {Object.keys(geoLocation).length !== 0 && (
+      
+            )} */}
           </>
         ) : (
           console.log("no hay datos")
@@ -135,7 +137,7 @@ const MapView = () => {
           position="top-left"
           trackUserLocation="true"
           showUserHeading="true"
-          ref={geolocateControlRef}
+          // ref={geolocateControlRef}
           onGeolocate={(e) => {
             let location = {
               longitude: e.coords.longitude,
@@ -145,6 +147,7 @@ const MapView = () => {
             setGeoLocation(location);
           }}
         />
+        <Logout />
       </Map>
     </>
   );

@@ -1,25 +1,37 @@
-import img1 from "../images/Ruta4.jpeg";
-import img2 from "../images/Ruta5.jpeg";
-import img3 from "../images/Ruta6.jpeg";
-import img4 from "../images/Ruta7.jpeg";
-import img5 from "../images/Ruta8.jpeg";
-import img6 from "../images/Ruta9.jpeg";
-import img7 from "../images/Ruta10.jpeg";
-import img8 from "../images/Ruta11.jpeg";
-import img9 from "../images/Ruta12.jpeg";
-import img10 from "../images/Ruta13.jpeg";
 import styles from "../imagenes.module.css";
 import { UserContext } from "../context/UserProvider";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRectangleXmark } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 const Station = ({ estacion, data, setSlider }) => {
   const { indications, setIndications } = useContext(UserContext);
   let result = data.filter((item) => item.ID_Estacion === estacion);
-
+  const [imageList, setImageList] = useState(null);
+  const { uploadImage, setUploadImage } = useContext(UserContext);
   useEffect(() => {
-    result.map((item) => console.log(item));
-  }, [result]);
+    const axiosData = async () => {
+      const URI = "http://localhost:5000/estaciones/image/" + estacion;
+      const res = await axios.get(URI);
+      setImageList(res.data);
+      setUploadImage(false);
+      console.log("1");
+    };
+    axiosData();
+  }, [estacion, uploadImage]);
+
+  /* useEffect(() => {
+    const axiosData = async () => {
+      const URI = "http://localhost:5000/estaciones/image/" + estacion;
+      const res = await axios.get(URI);
+      setImageList(res.data);
+      console.log(uploadImage);
+      console.log("1");
+      setUploadImage(false);
+    };
+    axiosData();
+  }, [uploadImage]); */
+
   return (
     <>
       {result.map((item) => (
@@ -39,34 +51,40 @@ const Station = ({ estacion, data, setSlider }) => {
             </div>
           </div>
 
-          <div className="container mt-5">
-            <p className="fs-6">{item.descripcion}</p>
-            <div className={styles["lista-imagenes"]}>
-              <img src={img1} alt="Imagen 1" />
-              <img src={img2} alt="Imagen 2" />
-              <img src={img3} alt="Imagen 3" />
-              <img src={img4} alt="Imagen 3" />
-              <img src={img5} alt="Imagen 3" />
-              <img src={img6} alt="Imagen 3" />
-              <img src={img7} alt="Imagen 3" />
-              <img src={img8} alt="Imagen 3" />
-              <img src={img9} alt="Imagen 3" />
-              <img src={img10} alt="Imagen 3" />
-            </div>
-
-            <div className={styles["input-box"]}>
-              <button
-                className={styles.button}
-                onClick={() => {
-                  setIndications(true);
-                }}
-              >
-                Indicaciones
-              </button>
+          <div className="container ">
+            <div className={styles.mtop}>
+              <p className="fs-6">{item.descripcion}</p>
             </div>
           </div>
         </div>
       ))}
+      <div className="container">
+        <div className={styles["lista-imagenes"]}>
+          {/* {imageList &&
+            imageList.map((image) => (
+              <img key={image} src={image.name} alt="Imagen 1" />
+            ))} */}
+          {imageList &&
+            imageList.map((image) => (
+              <img
+                key={image}
+                src={`http://localhost:5000/${estacion}/` + image}
+                alt="Imagen 1"
+              />
+            ))}
+        </div>
+
+        {/* <div className={styles["input-box"]}>
+          <button
+            className={styles.button}
+            onClick={() => {
+              setIndications(true);
+            }}
+          >
+            Indicaciones
+          </button>
+        </div> */}
+      </div>
     </>
   );
 };

@@ -5,6 +5,8 @@ export const UserContext = createContext();
 const UserProvider = ({ children }) => {
   const [online, setOnline] = useState(false);
   const [indications, setIndications] = useState(false);
+  const [upload, setUpload] = useState(false);
+  const [uploadImage, setUploadImage] = useState(false);
 
   useEffect(() => {
     readToken();
@@ -21,7 +23,16 @@ const UserProvider = ({ children }) => {
   };
   return (
     <UserContext.Provider
-      value={{ online, setOnline, indications, setIndications }}
+      value={{
+        online,
+        setOnline,
+        indications,
+        setIndications,
+        upload,
+        setUpload,
+        uploadImage,
+        setUploadImage,
+      }}
     >
       {children}
     </UserContext.Provider>
