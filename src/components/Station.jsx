@@ -5,17 +5,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRectangleXmark } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 const Station = ({ estacion, data, setSlider }) => {
-  const { indications, setIndications } = useContext(UserContext);
   let result = data.filter((item) => item.ID_Estacion === estacion);
-  const [imageList, setImageList] = useState(null);
+  const [imageList, setImageList] = useState([]);
   const { uploadImage, setUploadImage } = useContext(UserContext);
   useEffect(() => {
     const axiosData = async () => {
+      // console.log(estacion);
+
       const URI = "http://localhost:5000/estaciones/image/" + estacion;
       const res = await axios.get(URI);
+      // console.log(Object.keys(res.data));
       setImageList(res.data);
+
+      // console.log(imageList);
       setUploadImage(false);
-      console.log("1");
     };
     axiosData();
   }, [estacion, uploadImage]);

@@ -4,7 +4,7 @@ export const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
   const [online, setOnline] = useState(false);
-  const [indications, setIndications] = useState(false);
+  const [admin, setAdmin] = useState();
   const [upload, setUpload] = useState(false);
   const [uploadImage, setUploadImage] = useState(false);
 
@@ -17,6 +17,7 @@ const UserProvider = ({ children }) => {
 
     if (res.data.isToken) {
       setOnline(true);
+      setAdmin(true);
     } else {
       setOnline(null);
     }
@@ -26,12 +27,12 @@ const UserProvider = ({ children }) => {
       value={{
         online,
         setOnline,
-        indications,
-        setIndications,
         upload,
         setUpload,
         uploadImage,
         setUploadImage,
+        admin,
+        setAdmin,
       }}
     >
       {children}

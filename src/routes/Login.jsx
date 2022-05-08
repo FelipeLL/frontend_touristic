@@ -19,7 +19,7 @@ const Login = () => {
 
   // Guarda el email y la password del usuario que intenta logearse
   const [user, setUser] = useState(initialState);
-  const [admin, setAdmin] = useState();
+  const { admin, setAdmin } = useContext(UserContext);
   const { online, setOnline } = useContext(UserContext);
 
   const { email, password } = user;
@@ -50,7 +50,7 @@ const Login = () => {
 
   const provideAccess = () => {
     if (online) {
-      !admin ? navigate("/mapView") : navigate("/register");
+      navigate("/mapView");
       console.log("usuario online");
     } else {
       console.log("usuario offline");

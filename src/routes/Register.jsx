@@ -1,7 +1,7 @@
 import styles from "../register.module.css";
 import axios from "axios";
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 const Register = () => {
   const URI = "http://localhost:5000/users/register";
   const initialState = {
@@ -12,10 +12,9 @@ const Register = () => {
     password: "",
   };
   const [register, setRegister] = useState(initialState);
-  const { nombre, apellido, direccion, telefono, correo, password } = register;
+  const { nombre, apellido, telefono, correo, password } = register;
 
   //navigate es para mandarlo a una ruta especificada
-  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();

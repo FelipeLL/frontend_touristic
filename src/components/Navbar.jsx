@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "../Navbar.module.css";
 import AddStation from "./AddStation";
 import DeleteStation from "./DeleteStation";
@@ -6,7 +6,7 @@ import UpdateStation from "./UpdateStation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-regular-svg-icons";
 
-const Navbar = ({ active, setActive }) => {
+const Navbar = ({ setActive }) => {
   const [addStation, setAddStation] = useState(true);
   const [deleteStation, setDeleteStation] = useState(false);
   const [updateStation, setUpdateStation] = useState(false);

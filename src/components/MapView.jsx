@@ -31,9 +31,8 @@ const MapView = () => {
   const [slider, setSlider] = useState(false);
   const [data, setData] = useState([]);
   const [geoLocation, setGeoLocation] = useState({});
-  const { indications, setIndications } = useContext(UserContext);
   const [estacion, setEstacion] = useState(0);
-
+  const { admin, setAdmin } = useContext(UserContext);
   //establecen los limites del mapa
   const bounds = [
     [-74.453816, 4.213004], //Southwest coords
@@ -56,11 +55,6 @@ const MapView = () => {
     ));
   }, [data]);
 
-  // useEffect(() => {
-  //   console.log(slider);
-  //   console.log(estacion);
-  // }, [estacion]);
-
   //esta función itera cada una de las estaciones almacenadas en la bd y los muestra en el mapa
   const estacionesGeoJSON = useMemo(() => {
     return {
@@ -70,15 +64,6 @@ const MapView = () => {
       ),
     };
   }, [data]);
-
-  /* const geolocateControlRef = React.useCallback((ref) => {
-    if (ref) {
-      
-      setTimeout(function () {
-        ref.trigger();
-      }, 100);
-    }
-  }, []); */
 
   return (
     <>
@@ -97,38 +82,23 @@ const MapView = () => {
         mapStyle="mapbox://styles/jfelipeladino/cl1yho734000414o5b4b0j9xe"
       >
         {markers}
-        {/* <Marker
-          longitude={-74.35525}
-          latitude={4.312917}
-          color="#000"
-          onClick={(e) => {
-            setSlider(!slider);
-          }}
-        /> */}
+
         <Slider
           slider={slider}
           setSlider={setSlider}
           estacion={estacion}
           data={data}
         />
-        <Admin />
-        {/* <User /> */}
+        {admin && <Admin />}
 
         {data.length !== 0 ? (
           <>
             <GeocoderControl estacionesGeoJSON={estacionesGeoJSON} />
-            {/* <DirectionsControl
-              estacionesGeoJSON={estacionesGeoJSON}
-              geoLocation={geoLocation}
-            /> */}
+
             <DirectionsControl
               estacionesGeoJSON={estacionesGeoJSON}
               geoLocation={geoLocation}
-              indications={indications}
             />
-            {/* {Object.keys(geoLocation).length !== 0 && (
-      
-            )} */}
           </>
         ) : (
           console.log("no hay datos")
@@ -137,7 +107,6 @@ const MapView = () => {
           position="top-left"
           trackUserLocation="true"
           showUserHeading="true"
-          // ref={geolocateControlRef}
           onGeolocate={(e) => {
             let location = {
               longitude: e.coords.longitude,

@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { UserContext } from "../context/UserProvider";
 import styles from "../updateStation.module.css";
 import axios from "axios";
@@ -13,7 +13,7 @@ const AddStation = () => {
   const URI = "http://localhost:5000/estaciones";
 
   const [estaciones, setEstaciones] = useState(initialState);
-  const { upload, setUpload } = useContext(UserContext);
+  const { setUpload } = useContext(UserContext);
 
   const { nombre, longitud, latitud } = estaciones;
   const handleSubmit = async (e) => {
@@ -23,7 +23,7 @@ const AddStation = () => {
       return;
     }
 
-    const res = await axios.post(URI, estaciones);
+    await axios.post(URI, estaciones);
     setUpload(true);
     console.log("estación agregada");
   };

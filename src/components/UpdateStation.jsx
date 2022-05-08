@@ -86,7 +86,7 @@ const UpdateStation = () => {
       descripcion: "",
     });
 
-    const image = await axios.post(
+    await axios.post(
       "http://localhost:5000/estaciones/image/" + estacion,
       formdata
     );
