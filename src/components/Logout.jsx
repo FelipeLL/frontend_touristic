@@ -5,7 +5,7 @@ import axios from "axios";
 
 const Logout = () => {
   const cerrar = async () => {
-    const URI = "https://zoratamamap.herokuapp.com/logout";
+    const URI = "https://zoratamamap.herokuapp.com/auth/logout";
     const res = await axios.get(URI);
     // res && navigate("/register");
   };

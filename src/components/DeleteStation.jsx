@@ -6,7 +6,7 @@ const DeleteStation = () => {
   const { upload, setUpload } = useContext(UserContext);
   useEffect(() => {
     const axiosData = async () => {
-      const URI = "http://localhost:5000/estaciones";
+      const URI = "https://zoratamamap.herokuapp.com/estaciones";
       const res = await axios.get(URI);
       setData(res.data);
     };
