@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 const Register = () => {
-  const URI = "https://zoratamamap.herokuapp.com/register";
+  const URI = "https://zoratamamap.herokuapp.com/users/register";
   const initialState = {
     nombre: "",
     apellido: "",
