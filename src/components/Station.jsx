@@ -12,7 +12,8 @@ const Station = ({ estacion, data, setSlider }) => {
     const axiosData = async () => {
       // console.log(estacion);
 
-      const URI = "http://localhost:5000/estaciones/image/" + estacion;
+      const URI =
+        "https://zoratamamap.herokuapp.com/estaciones/image/" + estacion;
       const res = await axios.get(URI);
       // console.log(Object.keys(res.data));
       setImageList(res.data);
@@ -71,7 +72,7 @@ const Station = ({ estacion, data, setSlider }) => {
             imageList.map((image) => (
               <img
                 key={image}
-                src={`http://localhost:5000/${estacion}/` + image}
+                src={`https://zoratamamap.herokuapp.com/${estacion}/` + image}
                 alt="Imagen 1"
               />
             ))}

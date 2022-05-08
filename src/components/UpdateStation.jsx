@@ -10,7 +10,7 @@ const UpdateStation = () => {
   const { uploadImage, setUploadImage } = useContext(UserContext);
   useEffect(() => {
     const axiosData = async () => {
-      const URI = "http://localhost:5000/estaciones";
+      const URI = "https://zoratamamap.herokuapp.com/estaciones";
       const res = await axios.get(URI);
       setData(res.data);
     };
@@ -61,7 +61,7 @@ const UpdateStation = () => {
     }
 
     const res = await axios.put(
-      `http://localhost:5000/estaciones/${estacion}`,
+      `https://zoratamamap.herokuapp.com/estaciones/${estacion}`,
       estaciones
     );
     setUpload(true);
@@ -87,7 +87,7 @@ const UpdateStation = () => {
     });
 
     await axios.post(
-      "http://localhost:5000/estaciones/image/" + estacion,
+      "https://zoratamamap.herokuapp.com/estaciones/image/" + estacion,
       formdata
     );
     document.getElementById("fileInput").value = null;

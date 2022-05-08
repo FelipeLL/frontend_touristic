@@ -10,7 +10,7 @@ const AddStation = () => {
     latitud: "",
   };
 
-  const URI = "http://localhost:5000/estaciones";
+  const URI = "https://zoratamamap.herokuapp.com/estaciones";
 
   const [estaciones, setEstaciones] = useState(initialState);
   const { setUpload } = useContext(UserContext);

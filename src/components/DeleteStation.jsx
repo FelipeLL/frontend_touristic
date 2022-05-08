@@ -24,7 +24,7 @@ const DeleteStation = () => {
       return;
     }
     const res = await axios.delete(
-      `http://localhost:5000/estaciones/${estaciones.estacion}`
+      `https://zoratamamap.herokuapp.com/estaciones/${estaciones.estacion}`
     );
     setUpload(true);
     console.log("eliminado");

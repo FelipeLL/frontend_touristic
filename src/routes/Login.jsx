@@ -15,7 +15,7 @@ const Login = () => {
     password: "",
   };
 
-  const URI = "http://localhost:5000/auth";
+  const URI = "https://zoratamamap.herokuapp.com/auth";
 
   // Guarda el email y la password del usuario que intenta logearse
   const [user, setUser] = useState(initialState);

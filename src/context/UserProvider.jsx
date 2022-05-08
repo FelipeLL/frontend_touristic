@@ -13,7 +13,7 @@ const UserProvider = ({ children }) => {
   }, []);
   // esta función lee el token mediante una petición a la base de datos, si existe el token online se establece en true manteniendo la conexión del usuario en linea gracias al Auth.jsx
   const readToken = async () => {
-    const res = await axios.get("http://localhost:5000/auth");
+    const res = await axios.get("https://zoratamamap.herokuapp.com/auth");
 
     if (res.data.isToken) {
       setOnline(true);
