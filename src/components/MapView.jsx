@@ -9,10 +9,10 @@ import Admin from "./Admin";
 import { UserContext } from "../context/UserProvider";
 import Logout from "./Logout";
 import mapboxgl from "mapbox-gl";
-mapboxgl.workerClass =
-  require("worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker").default; // eslint-disable-line
 
 const MapView = () => {
+  mapboxgl.workerClass =
+    require("worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker").default; // eslint-disable-line
   //estado inicial de la vista
   const initialState = {
     longitude: -74.3464647,
