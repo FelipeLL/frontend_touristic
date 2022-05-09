@@ -9,7 +9,7 @@ import Admin from "./Admin";
 import { UserContext } from "../context/UserProvider";
 import Logout from "./Logout";
 import mapboxgl from "mapbox-gl";
-
+// @ts-ignore
 // eslint-disable-next-line import/no-webpack-loader-syntax
 mapboxgl.workerClass =
   require("worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker").default;
@@ -87,7 +87,7 @@ const MapView = () => {
         mapboxAccessToken="pk.eyJ1IjoiamZlbGlwZWxhZGlubyIsImEiOiJjbDFmbmc2MGIwMGFhM2NxYjNkMjJnNHl6In0.4DpT3U9E6A9nzbxdb_6vHg"
         mapStyle="mapbox://styles/jfelipeladino/cl1yho734000414o5b4b0j9xe"
       >
-        {markers}
+        {/* {markers} */}
 
         <Slider
           slider={slider}
@@ -97,7 +97,7 @@ const MapView = () => {
         />
         {admin && <Admin />}
 
-        {data.length !== 0 ? (
+        {/* {data.length !== 0 ? (
           <>
             <GeocoderControl estacionesGeoJSON={estacionesGeoJSON} />
 
@@ -108,8 +108,8 @@ const MapView = () => {
           </>
         ) : (
           console.log("no hay datos")
-        )}
-        <GeolocateControl
+        )} */}
+        {/* <GeolocateControl
           position="top-left"
           trackUserLocation="true"
           showUserHeading="true"
@@ -121,7 +121,7 @@ const MapView = () => {
 
             setGeoLocation(location);
           }}
-        />
+        /> */}
         <Logout />
       </Map>
     </>
