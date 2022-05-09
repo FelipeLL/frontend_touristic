@@ -12,7 +12,7 @@ import mapboxgl from "mapbox-gl";
 
 const MapView = () => {
   mapboxgl.workerClass =
-    require("worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker").default; // eslint-disable-line
+    require("worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker.js").default; // eslint-disable-line
   //estado inicial de la vista
   const initialState = {
     longitude: -74.3464647,
