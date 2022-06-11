@@ -8,6 +8,7 @@ import Slider from "./Slider";
 import Admin from "./Admin";
 import { UserContext } from "../context/UserProvider";
 import Logout from "./Logout";
+import OpenConfig from "./OpenConfig";
 
 const MapView = () => {
   //estado inicial de la vista
@@ -19,7 +20,7 @@ const MapView = () => {
   const { upload, setUpload } = useContext(UserContext);
   useEffect(() => {
     const axiosData = async () => {
-      const URI = "https://zoratamamap.herokuapp.com/estaciones";
+      const URI = "http://localhost:5000/estaciones";
       const res = await axios.get(URI);
       setData(res.data);
       setUpload(false);
@@ -30,6 +31,7 @@ const MapView = () => {
   //establecer vista
   const [viewState, setViewState] = useState(initialState);
   const [slider, setSlider] = useState(false);
+  const [sliderConfig, setSliderConfig] = useState(false);
   const [data, setData] = useState([]);
   const [geoLocation, setGeoLocation] = useState({});
   const [estacion, setEstacion] = useState(0);
@@ -90,7 +92,12 @@ const MapView = () => {
           estacion={estacion}
           data={data}
         />
-        {admin && <Admin />}
+        {admin && (
+          <Admin
+            sliderConfig={sliderConfig}
+            setSliderConfig={setSliderConfig}
+          />
+        )}
 
         {data.length !== 0 ? (
           <>
@@ -118,6 +125,7 @@ const MapView = () => {
           }}
         />
         <Logout />
+        <OpenConfig setSliderConfig={setSliderConfig} />
       </Map>
     </>
   );

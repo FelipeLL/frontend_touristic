@@ -1,38 +1,30 @@
+.logo_name {
+  padding-top: 30px;
+  color: #24231a;
+  font-size: 22px;
+  font-weight: 600;
+}
+
 .form {
   margin-top: 25px;
+}
+
+.text {
+  color: #24231a;
+  width: 100%;
+  font-size: 20px;
+  margin-left: 10px;
+  margin-top: 15px;
 }
 
 .input-box {
   height: 52px;
   margin: 5px 0;
 }
-.input-box-2 {
-  height: 52px;
-  margin: 5px 0;
-}
 
 .input {
-  height: 90%;
+  height: 70%;
   width: 90%;
-  margin-left: 10px;
-  outline: none;
-  padding: 0 15px;
-  font-size: 17px;
-  font-weight: 400;
-  color: #333;
-  border: 1.5px solid #c7bebe;
-  border-bottom-width: 2.5px;
-  border-radius: 6px;
-  transition: all 0.3s ease;
-}
-
-.nombre {
-  width: 96%;
-}
-
-.textArea {
-  height: 80px;
-  width: 96%;
   margin-left: 10px;
   outline: none;
   padding: 0 15px;
@@ -49,10 +41,33 @@
   border-color: #503e3c;
 }
 
+.nombre {
+  width: 96%;
+}
+
+.textArea {
+  height: 120px;
+  width: 96%;
+  margin-left: 10px;
+  outline: none;
+  padding: 0 15px;
+  font-size: 17px;
+  font-weight: 400;
+  color: #333;
+  border: 1.5px solid #c7bebe;
+  border-bottom-width: 2.5px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.textArea:focus {
+  border-color: #503e3c;
+}
+
 .button {
-  margin-top: 50px;
-  margin-left: 54px;
-  height: 80%;
+  margin-top: 130px;
+  margin-left: 45px;
+  height: 40px;
   width: 77%;
   outline: none;
   padding: 0 15px;
@@ -60,57 +75,32 @@
   letter-spacing: 0.5px;
   border: none;
   border-radius: 8px;
-  background: #6a5351;
+  background: #1a1e24;
   font-size: 25px;
   cursor: pointer;
 }
 
 .button:hover {
-  background: #503e3c;
+  background: #1a83e6;
 }
 
-.text {
-  color: #333;
-  width: 100%;
-  font-size: 20px;
-  margin-left: 10px;
-}
-
-.text-a {
-  text-decoration: none;
-  color: #1a83e6;
-}
-.imagen-texto {
-  margin-top: 40px;
-}
-
-.text-a:hover {
-  text-decoration: underline;
-}
-
-@media screen and (max-height: 680px) {
-  .form {
-    margin-top: 5px;
-  }
-  .input-box {
-    height: 32px;
-    margin: 5px 0;
-  }
-  .input-box-2 {
-    height: 42px;
-    margin: 1px 0;
-  }
-  .text {
-    font-size: 15px;
-  }
+@media screen and (max-height: 580px) {
   .textArea {
-    height: 40px;
-  }
-  .imagen-texto {
-    margin-top: 10px;
+    height: 100px;
   }
   .button {
-    margin-top: 15px;
-    font-size: 20px;
+    margin-top: 80px;
+  }
+}
+
+@media screen and (max-height: 530px) {
+  .text {
+    margin-top: 0;
+  }
+  .textArea {
+    height: 80px;
+  }
+  .button {
+    margin-top: 50px;
   }
 }

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "../editInformation.module.css";
+import styles from "../styles/editInformation.module.css";
 const EditInformation = () => {
   const [user, setUser] = useState({
     nombre: "",

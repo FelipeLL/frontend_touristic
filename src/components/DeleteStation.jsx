@@ -1,12 +1,12 @@
 import { useEffect, useState, useContext } from "react";
-import styles from "../deleteStation.module.css";
+import styles from "../styles/deleteStation.module.css";
 import axios from "axios";
 import { UserContext } from "../context/UserProvider";
 const DeleteStation = () => {
   const { upload, setUpload } = useContext(UserContext);
   useEffect(() => {
     const axiosData = async () => {
-      const URI = "https://zoratamamap.herokuapp.com/estaciones";
+      const URI = "http://localhost:5000/estaciones";
       const res = await axios.get(URI);
       setData(res.data);
     };
@@ -24,7 +24,7 @@ const DeleteStation = () => {
       return;
     }
     const res = await axios.delete(
-      `https://zoratamamap.herokuapp.com/estaciones/${estaciones.estacion}`
+      `http://localhost:5000/estaciones/${estaciones.estacion}`
     );
     setUpload(true);
     console.log("eliminado");
@@ -38,9 +38,11 @@ const DeleteStation = () => {
   };
   return (
     <>
-      <h3 className="my-5 text-center">Eliminar estación</h3>
+      <h3 className={`text-center ${styles["logo_name"]}`}>
+        Eliminar estación
+      </h3>
       <select
-        className="form-select "
+        className={`form-select ${styles.select}`}
         aria-label="Default select example"
         name="estacion"
         onChange={handleChange}

@@ -1,0 +1,135 @@
+.form {
+  margin-top: 25px;
+}
+
+.logo_name {
+  padding-top: 30px;
+  color: #24231a;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.select {
+  width: 96%;
+  margin-top: 50px;
+  margin-left: 9px;
+}
+
+.select:focus {
+  border-color: #1a83e6;
+  box-shadow: 1.5px -1.5px 5px #1a83e6;
+}
+
+.input-box {
+  height: 52px;
+  margin: 5px 0;
+}
+.input-box-2 {
+  height: 52px;
+  margin: 5px 0;
+}
+
+.input {
+  height: 70%;
+  width: 90%;
+  margin-left: 10px;
+  outline: none;
+  padding: 0 15px;
+  font-size: 17px;
+  font-weight: 400;
+  color: #333;
+  border: 1.5px solid #c7bebe;
+  border-bottom-width: 2.5px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.nombre {
+  width: 96%;
+}
+
+.textArea {
+  height: 120px;
+  width: 96%;
+  margin-left: 10px;
+  outline: none;
+  padding: 0 15px;
+  font-size: 17px;
+  font-weight: 400;
+  color: #333;
+  border: 1.5px solid #c7bebe;
+  border-bottom-width: 2.5px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.textArea:focus {
+  border-color: #503e3c;
+}
+
+.input:focus {
+  border-color: #503e3c;
+}
+
+.button {
+  margin-top: 130px;
+  margin-left: 45px;
+  height: 40px;
+  width: 77%;
+  outline: none;
+  padding: 0 15px;
+  color: #fff;
+  letter-spacing: 0.5px;
+  border: none;
+  border-radius: 8px;
+  background: #1a1e24;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: #1a83e6;
+}
+
+.text {
+  color: #333;
+  width: 100%;
+  font-size: 20px;
+  margin-left: 10px;
+}
+
+.text-a {
+  text-decoration: none;
+  color: #1a83e6;
+}
+.imagen-texto {
+  margin-top: 40px;
+}
+
+.text-a:hover {
+  text-decoration: underline;
+}
+
+@media screen and (max-height: 630px) {
+  .textArea {
+    height: 100px;
+  }
+  .button {
+    margin-top: 60px;
+  }
+}
+
+@media screen and (max-height: 560px) {
+  .select {
+    margin-top: 25px;
+  }
+  .text {
+    font-size: 16px;
+  }
+  .textArea {
+    height: 70px;
+  }
+  .button {
+    margin-top: 30px;
+  }
+}

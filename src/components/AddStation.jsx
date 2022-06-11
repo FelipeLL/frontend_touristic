@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { UserContext } from "../context/UserProvider";
-import styles from "../updateStation.module.css";
+import styles from "../styles/addStation.module.css";
 import axios from "axios";
 const AddStation = () => {
   const initialState = {
@@ -10,7 +10,7 @@ const AddStation = () => {
     latitud: "",
   };
 
-  const URI = "https://zoratamamap.herokuapp.com/estaciones";
+  const URI = "http://localhost:5000/estaciones";
 
   const [estaciones, setEstaciones] = useState(initialState);
   const { setUpload } = useContext(UserContext);
@@ -38,7 +38,7 @@ const AddStation = () => {
 
   return (
     <>
-      <h3 className="my-4 text-center">Añadir estación</h3>
+      <h3 className={`${styles["logo_name"]} text-center`}>Añadir estación</h3>
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className="row">
           <div className="col-12">
@@ -99,7 +99,7 @@ const AddStation = () => {
                 name="descripcion"
                 type="text"
                 cols="30"
-                rows="10"
+                rows="15"
                 className={styles.textArea}
                 onChange={handleChange}
               />

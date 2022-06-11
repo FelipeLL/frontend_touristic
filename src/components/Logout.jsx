@@ -1,11 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightToBracket } from "@fortawesome/free-solid-svg-icons";
-import styles from "../logout.module.css";
+import styles from "../styles/logout.module.css";
 import axios from "axios";
 
 const Logout = () => {
   const cerrar = async () => {
-    const URI = "https://zoratamamap.herokuapp.com/auth/logout";
+    const URI = "http://localhost:5000/auth/logout";
     const res = await axios.get(URI);
     // res && navigate("/register");
   };

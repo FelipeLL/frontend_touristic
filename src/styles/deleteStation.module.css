@@ -1,0 +1,42 @@
+.logo_name {
+  padding-top: 30px;
+  color: #24231a;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.select {
+  width: 90%;
+  margin-top: 50px;
+  margin-left: 20px;
+}
+
+.select:focus {
+  border-color: #1a83e6;
+  box-shadow: 1.5px -1.5px 5px #1a83e6;
+}
+
+.input-box {
+  height: 52px;
+  margin: 10px 0;
+}
+
+.button {
+  margin-top: 60px;
+  margin-left: 45px;
+  height: 80%;
+  width: 77%;
+  outline: none;
+  padding: 0 15px;
+  color: #fff;
+  letter-spacing: 0.5px;
+  border: none;
+  border-radius: 8px;
+  background: #1a1e24;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: #1a83e6;
+}

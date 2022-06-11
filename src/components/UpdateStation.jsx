@@ -1,16 +1,15 @@
 import React from "react";
 import { useState, useEffect, useContext } from "react";
-import styles from "../updateStation.module.css";
+import styles from "../styles/updateStation.module.css";
 import axios from "axios";
 import { UserContext } from "../context/UserProvider";
 
 const UpdateStation = () => {
   const { upload, setUpload } = useContext(UserContext);
-  const [file, setFile] = useState(null);
-  const { uploadImage, setUploadImage } = useContext(UserContext);
+
   useEffect(() => {
     const axiosData = async () => {
-      const URI = "https://zoratamamap.herokuapp.com/estaciones";
+      const URI = "http://localhost:5000/estaciones";
       const res = await axios.get(URI);
       setData(res.data);
     };
@@ -65,18 +64,6 @@ const UpdateStation = () => {
       estaciones
     );
     setUpload(true);
-    console.log("actualizado sin imagen");
-
-    if (!file) {
-      console.log("necesitas cargar un archivo");
-      return;
-    }
-
-    const formdata = new FormData();
-    formdata.append("image", file);
-
-    setUploadImage(true);
-    console.log("actualizado con imagen");
 
     setEstaciones({
       estacion: "Seleccionar estación",
@@ -85,19 +72,6 @@ const UpdateStation = () => {
       latitud: "",
       descripcion: "",
     });
-
-    await axios.post(
-      "https://zoratamamap.herokuapp.com/estaciones/image/" + estacion,
-      formdata
-    );
-    document.getElementById("fileInput").value = null;
-    setFile(null);
-
-    // console.log(upload);
-  };
-
-  const selectedHandle = (e) => {
-    setFile(e.target.files[0]);
   };
 
   const handleChange = (e) => {
@@ -110,9 +84,11 @@ const UpdateStation = () => {
 
   return (
     <>
-      <h3 className="my-2 text-center">Actualizar estación</h3>
+      <h3 className={`text-center ${styles["logo_name"]}`}>
+        Actualizar estación
+      </h3>
       <select
-        className="form-select "
+        className={`form-select ${styles.select}`}
         aria-label="Default select example"
         name="estacion"
         onChange={handleChange}
@@ -193,23 +169,6 @@ const UpdateStation = () => {
                 className={styles.textArea}
                 onChange={handleChange}
               />
-            </div>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-12">
-            <div className="container">
-              <div className={styles["imagen-texto"]}>
-                <label htmlFor="exampleInputEmail34" className={styles.text}>
-                  Imagen
-                </label>
-                <input
-                  type="file"
-                  id="fileInput"
-                  className="form-control mt-2"
-                  onChange={selectedHandle}
-                />
-              </div>
             </div>
           </div>
         </div>

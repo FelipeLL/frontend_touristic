@@ -1,4 +1,4 @@
-import styles from "../login.module.css";
+import styles from "../styles/login.module.css";
 import "../style.css";
 // import img_1 from "../images/r1.jpg";
 import logo from "../images/logo-final_opt.svg";
@@ -15,7 +15,7 @@ const Login = () => {
     password: "",
   };
 
-  const URI = "https://zoratamamap.herokuapp.com/auth";
+  const URI = "http://localhost:5000/auth";
 
   // Guarda el email y la password del usuario que intenta logearse
   const [user, setUser] = useState(initialState);

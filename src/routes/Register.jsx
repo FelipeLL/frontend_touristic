@@ -1,9 +1,9 @@
-import styles from "../register.module.css";
+import styles from "../styles/register.module.css";
 import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 const Register = () => {
-  const URI = "https://zoratamamap.herokuapp.com/users/register";
+  const URI = "http://localhost:5000/users/register";
   const initialState = {
     nombre: "",
     apellido: "",
