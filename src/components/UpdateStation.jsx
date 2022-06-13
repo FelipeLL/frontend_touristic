@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useState, useEffect, useContext } from "react";
 import styles from "../styles/updateStation.module.css";
 import axios from "axios";
@@ -16,8 +16,8 @@ const UpdateStation = () => {
     axiosData();
   }, [upload]);
 
+  const selectRef = useRef(null);
   const [data, setData] = useState([]);
-
   const [estaciones, setEstaciones] = useState({
     estacion: "Seleccionar estación",
     nombre: "",
@@ -60,11 +60,11 @@ const UpdateStation = () => {
     }
 
     const res = await axios.put(
-      `https://zoratamamap.herokuapp.com/estaciones/${estacion}`,
+      `http://localhost:5000/estaciones/${estacion}`,
       estaciones
     );
     setUpload(true);
-
+    selectRef.current.value = "Seleccionar estación";
     setEstaciones({
       estacion: "Seleccionar estación",
       nombre: "",
@@ -92,6 +92,7 @@ const UpdateStation = () => {
         aria-label="Default select example"
         name="estacion"
         onChange={handleChange}
+        ref={selectRef}
       >
         <option defaultValue={"0"}>Seleccionar estación</option>
         {data.map((estacion) => (

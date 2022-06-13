@@ -2,28 +2,23 @@ import styles from "../styles/imagenes.module.css";
 import { UserContext } from "../context/UserProvider";
 import { useContext, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRectangleXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+  faRectangleXmark,
+  faCircleXmark,
+} from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import img1 from "../images/g2.jpg";
+
 const Station = ({ estacion, data, setSlider }) => {
   //en el result se guarda la estación en especifico
   let result = data.filter((item) => item.ID_Estacion === estacion);
   const [imageList, setImageList] = useState([]);
   const { uploadImage, setUploadImage } = useContext(UserContext);
-  /* useEffect(() => {
-    const axiosData = async () => {
-      // console.log(estacion);
 
-      const URI = "http://localhost:5000/estaciones/image/" + estacion;
-      const res = await axios.get(URI);
-      // console.log(Object.keys(res.data));
-      setImageList(res.data);
-
-      // console.log(imageList);
-      setUploadImage(false);
-    };
-    axiosData();
-  }, [estacion, uploadImage]); */
+  const handleDeleteImage = async (index) => {
+    await axios.delete(`http://localhost:5000/estaciones/image/${index}`);
+    setUploadImage(true);
+    console.log("Imagen eliminada");
+  };
 
   useEffect(() => {
     const axiosData = async () => {
@@ -33,10 +28,10 @@ const Station = ({ estacion, data, setSlider }) => {
 
       setImageList(res.data);
 
-      // setUploadImage(false);
+      setUploadImage(false);
     };
     axiosData();
-  }, [estacion]);
+  }, [estacion, uploadImage]);
 
   return (
     <>
@@ -82,13 +77,17 @@ const Station = ({ estacion, data, setSlider }) => {
         </div>
 
         <div className={styles["lista-imagenes"]}>
-          {imageList &&
-            imageList.map((image, index) => (
-              <img key={index} src={image} alt="Imagen 1" />
+          {imageList.url &&
+            imageList.url.map((url, index) => (
+              <div key={imageList.id[index]}>
+                <img key={imageList.id[index]} src={url} alt="Imagen 1" />
+                <FontAwesomeIcon
+                  icon={faCircleXmark}
+                  className={`${styles["icon-img"]}`}
+                  onClick={() => handleDeleteImage(imageList.id[index])}
+                />
+              </div>
             ))}
-          {/*  {imageList.map((image, index) => (
-            <h3 key={index}>{image}</h3>
-          ))} */}
         </div>
       </div>
     </>

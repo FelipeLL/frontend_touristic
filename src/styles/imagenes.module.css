@@ -6,11 +6,28 @@
   margin-right: 10px;
   margin-top: 30px;
 }
+.lista-imagenes div {
+  position: relative;
+}
 
 .lista-imagenes {
   display: flex;
   overflow-y: auto;
 }
+
+.icon-img {
+  position: absolute;
+  right: 15px;
+  top: 35px;
+  color: #1a1e24;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.icon-img:hover {
+  color: #ad0200;
+}
+
 .input-box {
   height: 52px;
   margin: 10px 0;
@@ -62,10 +79,4 @@
 
 .icon:hover {
   color: #1a83e6;
-}
-
-.img {
-  width: 100%;
-  height: 100%;
-  padding-top: 25px;
 }

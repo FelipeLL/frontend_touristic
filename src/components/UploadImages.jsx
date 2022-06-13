@@ -1,4 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
+import { UserContext } from "../context/UserProvider";
 import styles from "../styles/uploadImages.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCloudArrowUp, faXmark } from "@fortawesome/free-solid-svg-icons";
@@ -13,7 +14,7 @@ const UploadImages = () => {
     };
     axiosData();
   }, []);
-
+  const { setUploadImage } = useContext(UserContext);
   const [fileName, setFileName] = useState(null);
   const [file, setFile] = useState(null);
   const [selectedFile, setselectedFile] = useState(null);
@@ -90,6 +91,7 @@ const UploadImages = () => {
       formdata
     );
     console.log("imagen insertada correctamente");
+    setUploadImage(true);
     inputFileRef.current.value = "";
     imgRef.current.src = "";
     setFileName(null);

@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import { UserContext } from "../context/UserProvider";
 import styles from "../styles/addStation.module.css";
 import axios from "axios";
+import { useRef } from "react";
 const AddStation = () => {
   const initialState = {
     nombre: "",
@@ -10,12 +11,16 @@ const AddStation = () => {
     latitud: "",
   };
 
-  const URI = "http://localhost:5000/estaciones";
+  const inputNameRef = useRef(null);
+  const inputLngRef = useRef(null);
+  const inputLatRef = useRef(null);
+  const inputDesRef = useRef(null);
 
+  const URI = "http://localhost:5000/estaciones";
   const [estaciones, setEstaciones] = useState(initialState);
   const { setUpload } = useContext(UserContext);
-
   const { nombre, longitud, latitud } = estaciones;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!longitud.trim() || !latitud.trim() || !nombre.trim()) {
@@ -25,6 +30,16 @@ const AddStation = () => {
 
     await axios.post(URI, estaciones);
     setUpload(true);
+    setEstaciones({
+      nombre: "",
+      descripcion: "",
+      longitud: "",
+      latitud: "",
+    });
+    inputNameRef.current.value = "";
+    inputLngRef.current.value = "";
+    inputLatRef.current.value = "";
+    inputDesRef.current.value = "";
     console.log("estación agregada");
   };
 
@@ -53,6 +68,7 @@ const AddStation = () => {
                 id="exampleInputEmail1"
                 name="nombre"
                 onChange={handleChange}
+                ref={inputNameRef}
               />
             </div>
           </div>
@@ -70,6 +86,7 @@ const AddStation = () => {
                 id="exampleInputEmail1"
                 name="longitud"
                 onChange={handleChange}
+                ref={inputLngRef}
               />
             </div>
           </div>
@@ -84,6 +101,7 @@ const AddStation = () => {
                 id="exampleInputEmail2"
                 name="latitud"
                 onChange={handleChange}
+                ref={inputLatRef}
               />
             </div>
           </div>
@@ -102,6 +120,7 @@ const AddStation = () => {
                 rows="15"
                 className={styles.textArea}
                 onChange={handleChange}
+                ref={inputDesRef}
               />
             </div>
           </div>
