@@ -1,6 +1,4 @@
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
@@ -15,10 +13,10 @@
   position: relative;
   max-width: 430px;
   width: 100%;
-  background: #fff;
   padding: 34px;
   border-radius: 6px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  background: #fff;
 }
 
 .titulo-h2 {
@@ -62,8 +60,7 @@
   transition: all 0.3s ease;
 }
 
-.input:focus,
-.input:valid {
+.input:focus {
   border-color: #503e3c;
 }
 
@@ -91,4 +88,16 @@
 
 .text-a:hover {
   text-decoration: underline;
+}
+
+@media screen and (max-height: 590px) {
+  .wrapper {
+    padding: 20px 34px 20px 34px;
+  }
+  .input-box {
+    height: 45px;
+  }
+  .form {
+    margin-top: 5px;
+  }
 }

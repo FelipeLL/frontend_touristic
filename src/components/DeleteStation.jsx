@@ -2,6 +2,9 @@ import { useEffect, useState, useContext } from "react";
 import styles from "../styles/deleteStation.module.css";
 import axios from "axios";
 import { UserContext } from "../context/UserProvider";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const DeleteStation = () => {
   const { upload, setUpload } = useContext(UserContext);
   useEffect(() => {
@@ -20,14 +23,24 @@ const DeleteStation = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (estaciones.estacion === "Seleccionar estación") {
-      console.log("Complete todos los campos");
+      toast.warning("Seleccione una estación", {
+        position: toast.POSITION.TOP_LEFT,
+        closeOnClick: false,
+        theme: "colored",
+        autoClose: 3000,
+      });
       return;
     }
     const res = await axios.delete(
       `http://localhost:5000/estaciones/${estaciones.estacion}`
     );
     setUpload(true);
-    console.log("eliminado");
+    toast.info("Estación eliminada correctamente", {
+      position: toast.POSITION.TOP_LEFT,
+      closeOnClick: false,
+      theme: "colored",
+      autoClose: 3000,
+    });
   };
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -62,6 +75,7 @@ const DeleteStation = () => {
           </button>
         </div>
       </form>
+      <ToastContainer />
     </>
   );
 };

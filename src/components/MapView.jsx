@@ -9,6 +9,7 @@ import Admin from "./Admin";
 import { UserContext } from "../context/UserProvider";
 import Logout from "./Logout";
 import OpenConfig from "./OpenConfig";
+import Point from "./Point";
 
 const MapView = () => {
   //estado inicial de la vista
@@ -35,7 +36,7 @@ const MapView = () => {
   const [data, setData] = useState([]);
   const [geoLocation, setGeoLocation] = useState({});
   const [estacion, setEstacion] = useState(0);
-  const { admin, setAdmin } = useContext(UserContext);
+  const { admin } = useContext(UserContext);
   //establecen los limites del mapa
   const bounds = [
     [-74.453816, 4.213004], //Southwest coords
@@ -49,12 +50,14 @@ const MapView = () => {
         key={estacion.ID_Estacion}
         longitude={estacion.longitud}
         latitude={estacion.latitud}
-        color="#46afff"
+        color="#fff"
         onClick={() => {
           setSlider(true);
           setEstacion(estacion.ID_Estacion);
         }}
-      ></Marker>
+      >
+        <Point />
+      </Marker>
     ));
   }, [data]);
 
@@ -92,11 +95,16 @@ const MapView = () => {
           estacion={estacion}
           data={data}
         />
+
+        {/* Si es admin muestra el icono y el slider de administrador */}
         {admin && (
-          <Admin
-            sliderConfig={sliderConfig}
-            setSliderConfig={setSliderConfig}
-          />
+          <>
+            <Admin
+              sliderConfig={sliderConfig}
+              setSliderConfig={setSliderConfig}
+            />
+            <OpenConfig setSliderConfig={setSliderConfig} />
+          </>
         )}
 
         {data.length !== 0 ? (
@@ -124,8 +132,8 @@ const MapView = () => {
             setGeoLocation(location);
           }}
         />
+
         <Logout />
-        <OpenConfig setSliderConfig={setSliderConfig} />
       </Map>
     </>
   );

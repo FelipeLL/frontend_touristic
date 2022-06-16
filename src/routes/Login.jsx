@@ -2,34 +2,47 @@ import styles from "../styles/login.module.css";
 import "../style.css";
 // import img_1 from "../images/r1.jpg";
 import logo from "../images/logo-final_opt.svg";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "../context/UserProvider";
+import { useForm } from "react-hook-form";
+import { formValidate } from "../utilities/formValidate";
+import FormError from "../components/FormError";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 axios.defaults.withCredentials = true;
 
 const Login = () => {
-  const initialState = {
+  /* const initialState = {
     email: "",
     password: "",
-  };
+  }; */
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const URI = "http://localhost:5000/auth";
 
+  const { required } = formValidate();
+
   // Guarda el email y la password del usuario que intenta logearse
-  const [user, setUser] = useState(initialState);
-  const { admin, setAdmin } = useContext(UserContext);
+  // const [user, setUser] = useState(initialState);
+  const { setAdmin } = useContext(UserContext);
   const { online, setOnline } = useContext(UserContext);
 
-  const { email, password } = user;
+  // const { email, password } = user;
   const navigate = useNavigate();
   useEffect(() => {
     provideAccess();
   }, [online]);
 
   //Enviar formulario
-  const handleSubmit = async (e) => {
+  /* const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email.trim() || !password.trim()) {
       console.log("Complete todos los campos");
@@ -40,12 +53,24 @@ const Login = () => {
     setOnline(res.data.isOnline);
     setAdmin(res.data.isAdmin);
 
-    /* const res = await axios({
-      method: "post",
-      baseURL: "/users",
-      data: user,
-      withCredentials: true,
-    }); */
+   
+  }; */
+  //Enviar formulario con react hook form
+  const onSubmit = async (data) => {
+    try {
+      const res = await axios.post(URI, data);
+      console.log(res.data);
+      setOnline(res.data.isOnline);
+      setAdmin(res.data.isAdmin);
+    } catch (error) {
+      console.log();
+      toast.error(`${error.response.data.message}`, {
+        position: toast.POSITION.TOP_RIGHT,
+        closeOnClick: false,
+        theme: "colored",
+        autoClose: 3000,
+      });
+    }
   };
 
   const provideAccess = () => {
@@ -57,13 +82,13 @@ const Login = () => {
     }
   };
 
-  const handleChange = (e) => {
+  /* const handleChange = (e) => {
     const { name, value } = e.target;
     setUser((old) => ({
       ...old,
       [name]: value,
     }));
-  };
+  }; */
 
   return (
     <>
@@ -165,20 +190,20 @@ const Login = () => {
 
           {/* <!-- formulario (contendra el lago del login) --> */}
 
-          <div className="px-lg-5 pt-lg-4 pb-lg-3 p-4 w-100 mb-auto">
+          <div className="px-lg-5 pt-lg-4 pb-lg-3 p-2  w-100 ">
             {/* <!--añadir pading al div del logo para hacerlo responsive--> */}
             <img src={logo} alt="img-fluid" />
           </div>
 
-          <div className="px-lg-5 py-lg-4 p-4 w-100 align-self-center">
+          <div className="px-lg-5 py-lg-4 p-sm-4 p-2  w-100 align-self-center">
             {/* <!--añadir pading al div del logo para hacerlo responsive alinea igual al logo--> */}
-            <h1 className="font-weight-bold mb-4 text-light">
+            <h1 className="font-weight-bold pt-2 pt-sm-5 text-light">
               Bienvenido de vuelta
             </h1>
 
             {/* <!--Formulario de ingreso--> */}
 
-            <form className={styles.form} onSubmit={handleSubmit}>
+            <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
               <label htmlFor="exampleInputEmail1" className={styles.text}>
                 Correo electronico
               </label>
@@ -190,9 +215,12 @@ const Login = () => {
                   id="exampleInputEmail1"
                   placeholder="Ingresa tu correo electrónico"
                   name="email"
-                  onChange={handleChange}
+                  {...register("email", {
+                    required,
+                  })}
                 />
               </div>
+              {errors.email && <FormError error={errors.email} />}
               <label htmlFor="exampleInputEmail2" className={styles.text}>
                 Contraseña
               </label>
@@ -203,9 +231,13 @@ const Login = () => {
                   id="exampleInputEmail2"
                   placeholder="Ingresa tu contraseña"
                   name="password"
-                  onChange={handleChange}
+                  {...register("password", {
+                    required,
+                  })}
                 />
               </div>
+              {errors.password && <FormError error={errors.password} />}
+
               {/* <div className={styles["text"]}>
                 <h6>
                   ¿Olvidaste tu contraseña?{" "}
@@ -243,9 +275,9 @@ const Login = () => {
             </div> */}
           </div>
 
-          <div className="text-center px-lg-5 pt-lg-3 pb-lg-4 p-4 w-100 mt-auto">
+          <div className="text-center px-lg-5 pt-lg-4  pb-lg-4 p-sm-4 p-3  w-100 ">
             {/* <!--seccion crear CUENTA-->     <!--text-black cambio de color y font-weight-bold para que no tenga movimiento--> */}
-            <p className="d-inline-block mb-0 ">
+            <p className={`d-inline-block mb-0 ${styles.link}`}>
               ¿Todavia no tienes una cuenta?
             </p>
             <Link to="/register" className={styles["text-a"]}>
@@ -255,6 +287,7 @@ const Login = () => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 };

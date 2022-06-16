@@ -4,7 +4,7 @@ export const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
   const [online, setOnline] = useState(false);
-  const [admin, setAdmin] = useState();
+  const [admin, setAdmin] = useState(false);
   const [upload, setUpload] = useState(false);
   const [uploadImage, setUploadImage] = useState(false);
 
@@ -16,8 +16,9 @@ const UserProvider = ({ children }) => {
     const res = await axios.get("http://localhost:5000/auth");
 
     if (res.data.isToken) {
+      res.data.isAdmin && setAdmin(true);
+
       setOnline(true);
-      setAdmin(true);
     } else {
       setOnline(null);
     }

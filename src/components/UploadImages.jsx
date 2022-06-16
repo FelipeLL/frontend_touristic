@@ -4,6 +4,8 @@ import styles from "../styles/uploadImages.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCloudArrowUp, faXmark } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const UploadImages = () => {
   useEffect(() => {
@@ -76,11 +78,21 @@ const UploadImages = () => {
     e.preventDefault();
 
     if (estaciones.estacion === "Seleccionar estación") {
-      console.log("Complete todos los campos");
+      toast.warning("Debe seleccionar una estación", {
+        position: toast.POSITION.TOP_LEFT,
+        closeOnClick: false,
+        theme: "colored",
+        autoClose: 3000,
+      });
       return;
     }
     if (!file) {
-      console.log("necesitas cargar un archivo");
+      toast.warning("Debe cargar un archivo", {
+        position: toast.POSITION.TOP_LEFT,
+        closeOnClick: false,
+        theme: "colored",
+        autoClose: 3000,
+      });
       return;
     }
     const formdata = new FormData();
@@ -90,7 +102,12 @@ const UploadImages = () => {
       "http://localhost:5000/estaciones/image/" + estaciones.estacion,
       formdata
     );
-    console.log("imagen insertada correctamente");
+    toast.info("Imagen agregada correctamente !", {
+      position: toast.POSITION.TOP_LEFT,
+      closeOnClick: false,
+      theme: "colored",
+      autoClose: 2000,
+    });
     setUploadImage(true);
     inputFileRef.current.value = "";
     imgRef.current.src = "";
@@ -172,6 +189,7 @@ const UploadImages = () => {
           </button>
         </div>
       </form>
+      <ToastContainer />
     </div>
   );
 };

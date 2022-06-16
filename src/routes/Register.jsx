@@ -2,6 +2,13 @@ import styles from "../styles/register.module.css";
 import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { formValidate } from "../utilities/formValidate";
+import FormError from "../components/FormError";
+
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const Register = () => {
   const URI = "http://localhost:5000/users/register";
   const initialState = {
@@ -11,12 +18,43 @@ const Register = () => {
     correo: "",
     password: "",
   };
-  const [register, setRegister] = useState(initialState);
-  const { nombre, apellido, telefono, correo, password } = register;
 
-  //navigate es para mandarlo a una ruta especificada
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    getValues,
+  } = useForm();
 
-  const handleSubmit = async (e) => {
+  const {
+    required,
+    patternEmail,
+    minLength,
+    validateTrim,
+    validateEquals,
+    patternPassword,
+  } = formValidate();
+
+  const onSubmit = async (data) => {
+    try {
+      await axios.post(URI, data);
+      toast.success(`La cuenta ha sido creada satisfactoriamente`, {
+        position: toast.POSITION.TOP_RIGHT,
+        closeOnClick: false,
+        theme: "colored",
+        autoClose: 3000,
+      });
+    } catch (error) {
+      toast.error(`${error.response.data.message}`, {
+        position: toast.POSITION.TOP_RIGHT,
+        closeOnClick: false,
+        theme: "colored",
+        autoClose: 3000,
+      });
+    }
+  };
+
+  /* const handleSubmit = async (e) => {
     e.preventDefault();
     if (
       !nombre.trim() ||
@@ -31,70 +69,100 @@ const Register = () => {
     }
     //enviando los datos al backend
     await axios.post(URI, register);
-  };
-  const handleChange = (e) => {
+  }; */
+  /* const handleChange = (e) => {
     const { name, value } = e.target;
     setRegister((old) => ({
       ...old,
       [name]: value,
     }));
-  };
+  }; */
 
   return (
     <div className={styles.body}>
       <div className={styles.wrapper}>
         <h2 className={styles["titulo-h2"]}>Registrarse</h2>
-        <form className={styles.form} onSubmit={handleSubmit}>
+        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           <div className={styles["input-box"]}>
             <input
               className={styles.input}
               type="text"
               placeholder="Nombre"
               name="nombre"
-              onChange={handleChange}
-              value={nombre}
+              {...register("nombre", {
+                required,
+              })}
             />
           </div>
+          {errors.nombre && <FormError error={errors.nombre} />}
           <div className={styles["input-box"]}>
             <input
               className={styles.input}
               type="text"
               placeholder="Apellido"
               name="apellido"
-              onChange={handleChange}
-              value={apellido}
+              {...register("apellido", {
+                required,
+              })}
             />
           </div>
+          {errors.apellido && <FormError error={errors.apellido} />}
           <div className={styles["input-box"]}>
             <input
               className={styles.input}
               type="text"
               placeholder="Teléfono"
               name="telefono"
-              onChange={handleChange}
-              value={telefono}
+              {...register("telefono", {
+                required,
+              })}
             />
           </div>
+          {errors.telefono && <FormError error={errors.telefono} />}
           <div className={styles["input-box"]}>
             <input
               className={styles.input}
               type="text"
               placeholder="Correo electrónico"
               name="correo"
-              onChange={handleChange}
-              value={correo}
+              {...register("correo", {
+                required,
+                pattern: patternEmail,
+              })}
             />
           </div>
+          {errors.correo && <FormError error={errors.correo} />}
           <div className={styles["input-box"]}>
             <input
               className={styles.input}
               type="password"
               placeholder="Contraseña"
               name="password"
-              onChange={handleChange}
-              value={password}
+              {...register("password", {
+                minLength,
+                validate: validateTrim,
+                pattern: patternPassword,
+              })}
             />
           </div>
+          {errors.password && <FormError error={errors.password} />}
+
+          <div className={styles["input-box"]}>
+            <input
+              className={styles.input}
+              type="password"
+              placeholder="Confirmar contraseña"
+              name="confirmPassword"
+              {...register("confirmPassword", {
+                validate: validateEquals(getValues),
+              })}
+              /* onChange={handleChange}
+              value={confirmPassword} */
+            />
+          </div>
+          {errors.confirmPassword && (
+            <FormError error={errors.confirmPassword} />
+          )}
 
           <div className={styles["input-box"]}>
             <button className={styles.button}>Registrarse</button>
@@ -106,6 +174,7 @@ const Register = () => {
           Inicia sesión
         </Link>
       </div>
+      <ToastContainer />
     </div>
   );
 };

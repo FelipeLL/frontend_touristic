@@ -3,6 +3,8 @@ import { UserContext } from "../context/UserProvider";
 import styles from "../styles/addStation.module.css";
 import axios from "axios";
 import { useRef } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const AddStation = () => {
   const initialState = {
     nombre: "",
@@ -24,7 +26,12 @@ const AddStation = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!longitud.trim() || !latitud.trim() || !nombre.trim()) {
-      console.log("Complete todos los campos");
+      toast.warning("Complete todos los campos", {
+        position: toast.POSITION.TOP_LEFT,
+        closeOnClick: false,
+        theme: "colored",
+        autoClose: 3000,
+      });
       return;
     }
 
@@ -40,7 +47,12 @@ const AddStation = () => {
     inputLngRef.current.value = "";
     inputLatRef.current.value = "";
     inputDesRef.current.value = "";
-    console.log("estación agregada");
+    toast.info("Estación agregada correctamente", {
+      position: toast.POSITION.TOP_LEFT,
+      closeOnClick: false,
+      theme: "colored",
+      autoClose: 3000,
+    });
   };
 
   const handleChange = (e) => {
@@ -132,6 +144,7 @@ const AddStation = () => {
           </button>
         </div>
       </form>
+      <ToastContainer />
     </>
   );
 };

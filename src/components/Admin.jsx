@@ -10,13 +10,12 @@ import {
   faCamera,
   faHandPointLeft,
 } from "@fortawesome/free-solid-svg-icons";
-import AddStation from "./AddStation";
-import DeleteStation from "./DeleteStation";
+
 import { optionsAdmin } from "../utilities/optionsAdmin";
 
 const Admin = ({ sliderConfig, setSliderConfig }) => {
   const [siderOn, setSiderOn] = useState(true);
-  const [slider, setSlider] = useState(false);
+
   const [option, setOption] = useState("1");
 
   return (

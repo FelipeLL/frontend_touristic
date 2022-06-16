@@ -7,6 +7,8 @@ import {
   faCircleXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Station = ({ estacion, data, setSlider }) => {
   //en el result se guarda la estación en especifico
@@ -15,9 +17,14 @@ const Station = ({ estacion, data, setSlider }) => {
   const { uploadImage, setUploadImage } = useContext(UserContext);
 
   const handleDeleteImage = async (index) => {
-    await axios.delete(`http://localhost:5000/estaciones/image/${index}`);
+    //await axios.delete(`http://localhost:5000/estaciones/image/${index}`);
     setUploadImage(true);
-    console.log("Imagen eliminada");
+    toast.info("Imagen eliminada correctamente !", {
+      position: toast.POSITION.TOP_RIGHT,
+      closeOnClick: false,
+      theme: "colored",
+      autoClose: 2000,
+    });
   };
 
   useEffect(() => {
@@ -90,6 +97,7 @@ const Station = ({ estacion, data, setSlider }) => {
             ))}
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 };
