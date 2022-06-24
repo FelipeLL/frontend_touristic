@@ -12,7 +12,7 @@ import FormError from "../components/FormError";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-axios.defaults.withCredentials = true;
+// axios.defaults.withCredentials = false;
 
 const Login = () => {
   /* const initialState = {
@@ -58,8 +58,14 @@ const Login = () => {
   //Enviar formulario con react hook form
   const onSubmit = async (data) => {
     try {
-      const res = await axios.post(URI, data);
-      console.log(res.data);
+      // const res = await axios.post(URI, data);
+      const res = await axios({
+        method: "post",
+        url: URI,
+        data,
+        withCredentials: true,
+      });
+
       setOnline(res.data.isOnline);
       setAdmin(res.data.isAdmin);
     } catch (error) {

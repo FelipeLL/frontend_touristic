@@ -1,7 +1,7 @@
 import styles from "../styles/station.module.css";
 import Station from "./Station";
 
-const Slider = ({ slider, setSlider, estacion, data }) => {
+const Slider = ({ slider, setSlider, estacion, data, setCurrentPosition }) => {
   return (
     <>
       <div
@@ -11,7 +11,12 @@ const Slider = ({ slider, setSlider, estacion, data }) => {
       >
         <div className={`${styles["sidebar-content"]}`}>
           <div className={styles.dashboard}>
-            <Station estacion={estacion} data={data} setSlider={setSlider} />
+            <Station
+              estacion={estacion}
+              data={data}
+              setSlider={setSlider}
+              setCurrentPosition={setCurrentPosition}
+            />
           </div>
         </div>
       </div>

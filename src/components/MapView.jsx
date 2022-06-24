@@ -34,8 +34,9 @@ const MapView = () => {
   const [slider, setSlider] = useState(false);
   const [sliderConfig, setSliderConfig] = useState(false);
   const [data, setData] = useState([]);
-  const [geoLocation, setGeoLocation] = useState({});
+
   const [estacion, setEstacion] = useState(0);
+  const [currentPosition, setCurrentPosition] = useState([]);
   const { admin } = useContext(UserContext);
   //establecen los limites del mapa
   const bounds = [
@@ -94,6 +95,7 @@ const MapView = () => {
           setSlider={setSlider}
           estacion={estacion}
           data={data}
+          setCurrentPosition={setCurrentPosition}
         />
 
         {/* Si es admin muestra el icono y el slider de administrador */}
@@ -111,10 +113,7 @@ const MapView = () => {
           <>
             <GeocoderControl estacionesGeoJSON={estacionesGeoJSON} />
 
-            <DirectionsControl
-              estacionesGeoJSON={estacionesGeoJSON}
-              geoLocation={geoLocation}
-            />
+            <DirectionsControl currentPosition={currentPosition} />
           </>
         ) : (
           console.log("no hay datos")
@@ -123,14 +122,14 @@ const MapView = () => {
           position="top-left"
           trackUserLocation="true"
           showUserHeading="true"
-          onGeolocate={(e) => {
+          /* onGeolocate={(e) => {
             let location = {
               longitude: e.coords.longitude,
               latitude: e.coords.latitude,
             };
 
             setGeoLocation(location);
-          }}
+          }} */
         />
 
         <Logout />

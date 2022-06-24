@@ -5,12 +5,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faRectangleXmark,
   faCircleXmark,
+  faDiamondTurnRight,
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Station = ({ estacion, data, setSlider }) => {
+const Station = ({ estacion, data, setSlider, setCurrentPosition }) => {
   //en el result se guarda la estación en especifico
   let result = data.filter((item) => item.ID_Estacion === estacion);
   const [imageList, setImageList] = useState([]);
@@ -25,6 +26,29 @@ const Station = ({ estacion, data, setSlider }) => {
       theme: "colored",
       autoClose: 2000,
     });
+  };
+
+  const handleCurrentPosition = () => {
+    const accessPosition = async (position) => {
+      setCurrentPosition([position.coords.longitude, position.coords.latitude]);
+      const res = await axios.get(
+        "https://api.mapbox.com/directions/v5/mapbox/driving/-74.3604375%2C4.3208998%3B-74.353046%2C4.313163?alternatives=true&geometries=geojson&language=es&overview=simplified&steps=true&access_token=pk.eyJ1IjoiamZlbGlwZWxhZGlubyIsImEiOiJjbDFmbHF1dzUwMXo1M2JudDQwNjVoNWw3In0.wiRr4CxecJHGtM18meygeQ"
+      );
+      console.log(res);
+    };
+    const errorPosition = (err) => {
+      console.log("Error obteniendo ubicación: ", err);
+    };
+    const optionsRequest = {
+      enableHighAccuracy: true, // Alta precisión
+      maximumAge: 0, // No queremos caché
+      timeout: 5000, // Esperar solo 5 segundos
+    };
+    navigator.geolocation.getCurrentPosition(
+      accessPosition,
+      errorPosition,
+      optionsRequest
+    );
   };
 
   useEffect(() => {
@@ -72,10 +96,10 @@ const Station = ({ estacion, data, setSlider }) => {
             height: "50px",
           }}
         >
-          <div className={styles.content}>
+          <div className={styles.content} onClick={handleCurrentPosition}>
             <span>
               <FontAwesomeIcon
-                icon={faRectangleXmark}
+                icon={faDiamondTurnRight}
                 className={`${styles.indications}`}
               />
             </span>
