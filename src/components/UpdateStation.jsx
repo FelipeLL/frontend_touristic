@@ -11,7 +11,7 @@ const UpdateStation = () => {
 
   useEffect(() => {
     const axiosData = async () => {
-      const URI = "http://localhost:5000/estaciones";
+      const URI = "onClick={handleCurrentPosition}/estaciones";
       const res = await axios.get(URI);
       setData(res.data);
     };
@@ -66,7 +66,10 @@ const UpdateStation = () => {
       return;
     }
 
-    await axios.put(`http://localhost:5000/estaciones/${estacion}`, estaciones);
+    await axios.put(
+      `https://zoratama-map.netlify.app/estaciones/${estacion}`,
+      estaciones
+    );
     setUpload(true);
     selectRef.current.value = "Seleccionar estación";
     setEstaciones({

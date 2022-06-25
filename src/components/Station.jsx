@@ -18,7 +18,9 @@ const Station = ({ estacion, data, setSlider, setCurrentPosition }) => {
   const { uploadImage, setUploadImage } = useContext(UserContext);
 
   const handleDeleteImage = async (index) => {
-    //await axios.delete(`http://localhost:5000/estaciones/image/${index}`);
+    await axios.delete(
+      `https://zoratama-map.netlify.app/estaciones/image/${index}`
+    );
     setUploadImage(true);
     toast.info("Imagen eliminada correctamente !", {
       position: toast.POSITION.TOP_RIGHT,
@@ -53,7 +55,8 @@ const Station = ({ estacion, data, setSlider, setCurrentPosition }) => {
 
   useEffect(() => {
     const axiosData = async () => {
-      const URI = "http://localhost:5000/estaciones/image/" + estacion;
+      const URI =
+        "https://zoratama-map.netlify.app/estaciones/image/" + estacion;
 
       const res = await axios.get(URI);
 
@@ -96,7 +99,7 @@ const Station = ({ estacion, data, setSlider, setCurrentPosition }) => {
             height: "50px",
           }}
         >
-          <div className={styles.content} onClick={handleCurrentPosition}>
+          <div className={styles.content}>
             <span>
               <FontAwesomeIcon
                 icon={faDiamondTurnRight}

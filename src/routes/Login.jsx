@@ -26,7 +26,7 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const URI = "http://localhost:5000/auth";
+  const URI = "https://zoratama-map.netlify.app/auth";
 
   const { required } = formValidate();
 

@@ -16,7 +16,7 @@ const UserProvider = ({ children }) => {
     //const res = await axios.get("http://localhost:5000/auth");
     const res = await axios({
       method: "get",
-      url: "http://localhost:5000/auth",
+      url: "https://zoratama-map.netlify.app/auth",
       withCredentials: true,
     });
     if (res.data.isToken) {

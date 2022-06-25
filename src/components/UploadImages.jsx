@@ -99,7 +99,8 @@ const UploadImages = () => {
     formdata.append("image", file);
 
     await axios.post(
-      "http://localhost:5000/estaciones/image/" + estaciones.estacion,
+      "https://zoratama-map.netlify.app/estaciones/image/" +
+        estaciones.estacion,
       formdata
     );
     toast.info("Imagen agregada correctamente !", {

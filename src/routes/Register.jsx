@@ -10,7 +10,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Register = () => {
-  const URI = "http://localhost:5000/users/register";
+  const URI = "https://zoratama-map.netlify.app/users/register";
   const initialState = {
     nombre: "",
     apellido: "",

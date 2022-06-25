@@ -9,7 +9,7 @@ const DeleteStation = () => {
   const { upload, setUpload } = useContext(UserContext);
   useEffect(() => {
     const axiosData = async () => {
-      const URI = "http://localhost:5000/estaciones";
+      const URI = "https://zoratama-map.netlify.app/estaciones";
       const res = await axios.get(URI);
       setData(res.data);
     };
@@ -32,7 +32,7 @@ const DeleteStation = () => {
       return;
     }
     const res = await axios.delete(
-      `http://localhost:5000/estaciones/${estaciones.estacion}`
+      `https://zoratama-map.netlify.app/estaciones/${estaciones.estacion}`
     );
     setUpload(true);
     toast.info("Estación eliminada correctamente", {
