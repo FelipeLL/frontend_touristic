@@ -11,13 +11,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Register = () => {
   const URI = "http://localhost:5000/users/register";
-  const initialState = {
-    nombre: "",
-    apellido: "",
-    telefono: "",
-    correo: "",
-    password: "",
-  };
 
   const {
     register,
@@ -53,30 +46,6 @@ const Register = () => {
       });
     }
   };
-
-  /* const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (
-      !nombre.trim() ||
-      !apellido.trim() ||
-      !telefono.trim() ||
-      !correo.trim() ||
-      !password.trim()
-    ) {
-      // e.target[0].focus();
-      console.log("Complete todos los campos");
-      return;
-    }
-    //enviando los datos al backend
-    await axios.post(URI, register);
-  }; */
-  /* const handleChange = (e) => {
-    const { name, value } = e.target;
-    setRegister((old) => ({
-      ...old,
-      [name]: value,
-    }));
-  }; */
 
   return (
     <div className={styles.body}>
@@ -156,8 +125,6 @@ const Register = () => {
               {...register("confirmPassword", {
                 validate: validateEquals(getValues),
               })}
-              /* onChange={handleChange}
-              value={confirmPassword} */
             />
           </div>
           {errors.confirmPassword && (
