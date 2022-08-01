@@ -2,14 +2,14 @@ import React, { useState, useMemo, useEffect, useContext } from "react";
 import Map, { Marker, GeolocateControl } from "react-map-gl";
 import axios from "axios";
 import { point } from "@turf/helpers";
-import GeocoderControl from "./GeocoderControl";
-import DirectionsControl from "./DirectionsControl";
-import Slider from "./Slider";
-import Admin from "./Admin";
+import GeocoderControl from "../components/GeocoderControl";
+import DirectionsControl from "../components/DirectionsControl";
+import Slider from "../components/Slider";
+import Admin from "../components/Admin";
 import { UserContext } from "../context/UserProvider";
-import Logout from "./Logout";
-import OpenConfig from "./OpenConfig";
-import Point from "./Point";
+import Logout from "../components/Logout";
+import OpenConfig from "../components/OpenConfig";
+import Point from "../components/Point";
 
 const MapView = () => {
   //estado inicial de la vista

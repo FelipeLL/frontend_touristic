@@ -7,7 +7,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./routes/Login";
 import UserProvider from './context/UserProvider';
-import MapView from './components/MapView';
+import MapView from './routes/MapView';
 import Auth from "./components/Auth";
 import Register from './routes/Register';
 ReactDOM.render(

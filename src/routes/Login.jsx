@@ -53,7 +53,6 @@ const Login = () => {
   const provideAccess = () => {
     if (online) {
       navigate("/mapView");
-      //console.log("usuario online");
     } else {
       //console.log("usuario offline");
     }
