@@ -16,9 +16,10 @@ const Station = ({ estacion, data, setSlider, setCurrentPosition }) => {
   let result = data.filter((item) => item.ID_Estacion === estacion);
   const [imageList, setImageList] = useState([]);
   const { uploadImage, setUploadImage } = useContext(UserContext);
+  const { admin } = useContext(UserContext);
 
   const handleDeleteImage = async (index) => {
-    //await axios.delete(`http://localhost:5000/estaciones/image/${index}`);
+    await axios.delete(`http://localhost:5000/estaciones/image/${index}`);
     setUploadImage(true);
     toast.info("Imagen eliminada correctamente !", {
       position: toast.POSITION.TOP_RIGHT,
@@ -34,7 +35,7 @@ const Station = ({ estacion, data, setSlider, setCurrentPosition }) => {
       const res = await axios.get(
         "https://api.mapbox.com/directions/v5/mapbox/driving/-74.3604375%2C4.3208998%3B-74.353046%2C4.313163?alternatives=true&geometries=geojson&language=es&overview=simplified&steps=true&access_token=pk.eyJ1IjoiamZlbGlwZWxhZGlubyIsImEiOiJjbDFmbHF1dzUwMXo1M2JudDQwNjVoNWw3In0.wiRr4CxecJHGtM18meygeQ"
       );
-      console.log(res);
+      console.log(res.data);
     };
     const errorPosition = (err) => {
       console.log("Error obteniendo ubicación: ", err);
@@ -106,20 +107,30 @@ const Station = ({ estacion, data, setSlider, setCurrentPosition }) => {
             <p className={styles["content-text"]}>Indicaciones</p>
           </div>
         </div>
-
-        <div className={styles["lista-imagenes"]}>
-          {imageList.url &&
-            imageList.url.map((url, index) => (
-              <div key={imageList.id[index]}>
-                <img key={imageList.id[index]} src={url} alt="Imagen 1" />
-                <FontAwesomeIcon
-                  icon={faCircleXmark}
-                  className={`${styles["icon-img"]}`}
-                  onClick={() => handleDeleteImage(imageList.id[index])}
-                />
-              </div>
-            ))}
-        </div>
+        {admin ? (
+          <div className={styles["lista-imagenes"]}>
+            {imageList.url &&
+              imageList.url.map((url, index) => (
+                <div key={imageList.id[index]}>
+                  <img key={imageList.id[index]} src={url} alt="Imagen 1" />
+                  <FontAwesomeIcon
+                    icon={faCircleXmark}
+                    className={`${styles["icon-img"]}`}
+                    onClick={() => handleDeleteImage(imageList.id[index])}
+                  />
+                </div>
+              ))}
+          </div>
+        ) : (
+          <div className={styles["lista-imagenes"]}>
+            {imageList.url &&
+              imageList.url.map((url, index) => (
+                <div key={imageList.id[index]}>
+                  <img key={imageList.id[index]} src={url} alt="Imagen 1" />
+                </div>
+              ))}
+          </div>
+        )}
       </div>
       <ToastContainer />
     </>
