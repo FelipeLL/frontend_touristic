@@ -1,15 +1,16 @@
+import "react-toastify/dist/ReactToastify.css";
 import styles from "../styles/imagenes.module.css";
-import { UserContext } from "../context/UserProvider";
-import { useContext, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faRectangleXmark,
   faCircleXmark,
   faDiamondTurnRight,
 } from "@fortawesome/free-solid-svg-icons";
+import { ToastContainer } from "react-toastify";
 import axios from "axios";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { useContext, useEffect, useState } from "react";
+import { UserContext } from "../context/UserProvider";
+import { alertInfo } from "../utilities/Alerts";
 
 const Station = ({ estacion, data, setSlider, setCurrentPosition }) => {
   //en el result se guarda la estación en especifico
@@ -21,12 +22,7 @@ const Station = ({ estacion, data, setSlider, setCurrentPosition }) => {
   const handleDeleteImage = async (index) => {
     await axios.delete(`http://localhost:5000/estaciones/image/${index}`);
     setUploadImage(true);
-    toast.info("Imagen eliminada correctamente !", {
-      position: toast.POSITION.TOP_RIGHT,
-      closeOnClick: false,
-      theme: "colored",
-      autoClose: 2000,
-    });
+    alertInfo("Imagen eliminada correctamente");
   };
 
   const handleCurrentPosition = () => {

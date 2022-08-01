@@ -1,12 +1,12 @@
 import styles from "../styles/register.module.css";
 import axios from "axios";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { formValidate } from "../utilities/formValidate";
 import FormError from "../components/FormError";
+import { alertError, alertSuccess } from "../utilities/Alerts";
 
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Register = () => {
@@ -31,19 +31,9 @@ const Register = () => {
   const onSubmit = async (data) => {
     try {
       await axios.post(URI, data);
-      toast.success(`La cuenta ha sido creada satisfactoriamente`, {
-        position: toast.POSITION.TOP_RIGHT,
-        closeOnClick: false,
-        theme: "colored",
-        autoClose: 3000,
-      });
+      alertSuccess(`La cuenta ha sido creada satisfactoriamente`);
     } catch (error) {
-      toast.error(`${error.response.data.message}`, {
-        position: toast.POSITION.TOP_RIGHT,
-        closeOnClick: false,
-        theme: "colored",
-        autoClose: 3000,
-      });
+      alertError(error.response.data.message);
     }
   };
 

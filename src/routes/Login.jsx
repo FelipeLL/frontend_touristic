@@ -1,15 +1,16 @@
-import styles from "../styles/login.module.css";
+import "react-toastify/dist/ReactToastify.css";
 import "../style.css";
+import styles from "../styles/login.module.css";
 import logo from "../images/logo-final_opt.svg";
+import { UserContext } from "../context/UserProvider";
 import { useContext, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-import { UserContext } from "../context/UserProvider";
 import { useForm } from "react-hook-form";
 import { formValidate } from "../utilities/formValidate";
 import FormError from "../components/FormError";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { alertError } from "../utilities/Alerts";
+import { ToastContainer } from "react-toastify";
 
 const Login = () => {
   const {
@@ -41,21 +42,12 @@ const Login = () => {
       setOnline(res.data.isOnline);
       setAdmin(res.data.isAdmin);
     } catch (error) {
-      toast.error(`${error.response.data.message}`, {
-        position: toast.POSITION.TOP_RIGHT,
-        closeOnClick: false,
-        theme: "colored",
-        autoClose: 3000,
-      });
+      alertError(error.response.data.message);
     }
   };
 
   const provideAccess = () => {
-    if (online) {
-      navigate("/mapView");
-    } else {
-      //console.log("usuario offline");
-    }
+    online && navigate("/mapView");
   };
 
   return (
