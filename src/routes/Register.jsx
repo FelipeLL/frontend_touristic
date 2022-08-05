@@ -1,23 +1,16 @@
 import styles from "../styles/register.module.css";
 import axios from "axios";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { formValidate } from "../utilities/formValidate";
 import FormError from "../components/FormError";
+import { alertError, alertSuccess } from "../utilities/Alerts";
 
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Register = () => {
   const URI = "https://zoratama-map.netlify.app/users/register";
-  const initialState = {
-    nombre: "",
-    apellido: "",
-    telefono: "",
-    correo: "",
-    password: "",
-  };
 
   const {
     register,
@@ -38,45 +31,11 @@ const Register = () => {
   const onSubmit = async (data) => {
     try {
       await axios.post(URI, data);
-      toast.success(`La cuenta ha sido creada satisfactoriamente`, {
-        position: toast.POSITION.TOP_RIGHT,
-        closeOnClick: false,
-        theme: "colored",
-        autoClose: 3000,
-      });
+      alertSuccess(`La cuenta ha sido creada satisfactoriamente`);
     } catch (error) {
-      toast.error(`${error.response.data.message}`, {
-        position: toast.POSITION.TOP_RIGHT,
-        closeOnClick: false,
-        theme: "colored",
-        autoClose: 3000,
-      });
+      alertError(error.response.data.message);
     }
   };
-
-  /* const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (
-      !nombre.trim() ||
-      !apellido.trim() ||
-      !telefono.trim() ||
-      !correo.trim() ||
-      !password.trim()
-    ) {
-      // e.target[0].focus();
-      console.log("Complete todos los campos");
-      return;
-    }
-    //enviando los datos al backend
-    await axios.post(URI, register);
-  }; */
-  /* const handleChange = (e) => {
-    const { name, value } = e.target;
-    setRegister((old) => ({
-      ...old,
-      [name]: value,
-    }));
-  }; */
 
   return (
     <div className={styles.body}>
@@ -156,8 +115,6 @@ const Register = () => {
               {...register("confirmPassword", {
                 validate: validateEquals(getValues),
               })}
-              /* onChange={handleChange}
-              value={confirmPassword} */
             />
           </div>
           {errors.confirmPassword && (

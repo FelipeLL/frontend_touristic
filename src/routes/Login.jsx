@@ -1,64 +1,37 @@
-import styles from "../styles/login.module.css";
+import "react-toastify/dist/ReactToastify.css";
 import "../style.css";
-// import img_1 from "../images/r1.jpg";
+import styles from "../styles/login.module.css";
 import logo from "../images/logo-final_opt.svg";
+import { UserContext } from "../context/UserProvider";
 import { useContext, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-import { UserContext } from "../context/UserProvider";
 import { useForm } from "react-hook-form";
 import { formValidate } from "../utilities/formValidate";
 import FormError from "../components/FormError";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
-// axios.defaults.withCredentials = false;
+import { alertError } from "../utilities/Alerts";
+import { ToastContainer } from "react-toastify";
 
 const Login = () => {
-  /* const initialState = {
-    email: "",
-    password: "",
-  }; */
-
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const { required } = formValidate();
+  const navigate = useNavigate();
 
   const URI = "https://zoratama-map.netlify.app/auth";
 
-  const { required } = formValidate();
-
-  // Guarda el email y la password del usuario que intenta logearse
-  // const [user, setUser] = useState(initialState);
   const { setAdmin } = useContext(UserContext);
   const { online, setOnline } = useContext(UserContext);
 
-  // const { email, password } = user;
-  const navigate = useNavigate();
   useEffect(() => {
     provideAccess();
   }, [online]);
 
-  //Enviar formulario
-  /* const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!email.trim() || !password.trim()) {
-      console.log("Complete todos los campos");
-      return;
-    }
-    //Se envia la URI con el email y la contraseña que el usuario digito en el formulario
-    const res = await axios.post(URI, user);
-    setOnline(res.data.isOnline);
-    setAdmin(res.data.isAdmin);
-
-   
-  }; */
-  //Enviar formulario con react hook form
   const onSubmit = async (data) => {
     try {
-      // const res = await axios.post(URI, data);
       const res = await axios({
         method: "post",
         url: URI,
@@ -69,38 +42,17 @@ const Login = () => {
       setOnline(res.data.isOnline);
       setAdmin(res.data.isAdmin);
     } catch (error) {
-      console.log();
-      toast.error(`${error.response.data.message}`, {
-        position: toast.POSITION.TOP_RIGHT,
-        closeOnClick: false,
-        theme: "colored",
-        autoClose: 3000,
-      });
+      alertError(error.response.data.message);
     }
   };
 
   const provideAccess = () => {
-    if (online) {
-      navigate("/mapView");
-      console.log("usuario online");
-    } else {
-      console.log("usuario offline");
-    }
+    online && navigate("/mapView");
   };
-
-  /* const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUser((old) => ({
-      ...old,
-      [name]: value,
-    }));
-  }; */
 
   return (
     <>
-      {/* <!--g-o quitamos scroll lateral--> */}
       <div className="row g-0">
-        {/* <!--TODA LA SECCION DEL CARROUSEL--> */}
         <div className="col-lg-7 d-none d-lg-block">
           {/* <!--d lg block para que se muestra a partir de dispositivos medianos--> */}
 
@@ -192,22 +144,14 @@ const Login = () => {
         </div>
 
         <div className="col-lg-5 d-flex flex-column align-items-end min-vh-100">
-          {/* <!--acomoda texto d-flex flex-column--> */}
-
-          {/* <!-- formulario (contendra el lago del login) --> */}
-
           <div className="px-lg-5 pt-lg-4 pb-lg-3 p-2  w-100 ">
-            {/* <!--añadir pading al div del logo para hacerlo responsive--> */}
             <img src={logo} alt="img-fluid" />
           </div>
 
           <div className="px-lg-5 py-lg-4 p-sm-4 p-2  w-100 align-self-center">
-            {/* <!--añadir pading al div del logo para hacerlo responsive alinea igual al logo--> */}
             <h1 className="font-weight-bold pt-2 pt-sm-5 text-light">
               Bienvenido de vuelta
             </h1>
-
-            {/* <!--Formulario de ingreso--> */}
 
             <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
               <label htmlFor="exampleInputEmail1" className={styles.text}>
@@ -244,45 +188,13 @@ const Login = () => {
               </div>
               {errors.password && <FormError error={errors.password} />}
 
-              {/* <div className={styles["text"]}>
-                <h6>
-                  ¿Olvidaste tu contraseña?{" "}
-                  <a href="#" className={styles["text-a"]}>
-                    Recuperala
-                  </a>
-                </h6>
-              </div> */}
-
               <div className={styles["input-box"]}>
                 <button className={styles.button}>Iniciar Sesión</button>
               </div>
             </form>
-            {/* <!--Seccion O inicia sesion--> */}
-            {/* <p class="font-weight-bold text-center text-muted">O inicia sesion con</p> <!--text-center para centrar el texto--> */}
-
-            {/* <div className="d-flex justify-content-around">
-              
-
-              <button
-                type="submit"
-                className="btn btn-outline-black-x flex-grow-1 mr-2"
-              >
-                {" "}
-                <i className="fa-brands fa-google lead mr-2"></i> Google
-              </button>
-
-              <button
-                type="submit"
-                className="btn btn-outline-black-x flex-grow-1 ml-2"
-              >
-                {" "}
-                <i className="fa-brands fa-facebook lead mr-2"></i> Facebook
-              </button>
-            </div> */}
           </div>
 
           <div className="text-center px-lg-5 pt-lg-4  pb-lg-4 p-sm-4 p-3  w-100 ">
-            {/* <!--seccion crear CUENTA-->     <!--text-black cambio de color y font-weight-bold para que no tenga movimiento--> */}
             <p className={`d-inline-block mb-0 ${styles.link}`}>
               ¿Todavia no tienes una cuenta?
             </p>

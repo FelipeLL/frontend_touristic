@@ -1,11 +1,12 @@
-import React, { useState, useRef, useEffect, useContext } from "react";
-import { UserContext } from "../context/UserProvider";
+import "react-toastify/dist/ReactToastify.css";
 import styles from "../styles/uploadImages.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCloudArrowUp, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { ToastContainer } from "react-toastify";
 import axios from "axios";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import React, { useState, useRef, useEffect, useContext } from "react";
+import { UserContext } from "../context/UserProvider";
+import { alertInfo, alertWarning } from "../utilities/Alerts";
 
 const UploadImages = () => {
   useEffect(() => {
@@ -78,21 +79,11 @@ const UploadImages = () => {
     e.preventDefault();
 
     if (estaciones.estacion === "Seleccionar estación") {
-      toast.warning("Debe seleccionar una estación", {
-        position: toast.POSITION.TOP_LEFT,
-        closeOnClick: false,
-        theme: "colored",
-        autoClose: 3000,
-      });
+      alertWarning("Debe seleccionar una estación");
       return;
     }
     if (!file) {
-      toast.warning("Debe cargar un archivo", {
-        position: toast.POSITION.TOP_LEFT,
-        closeOnClick: false,
-        theme: "colored",
-        autoClose: 3000,
-      });
+      alertWarning("Debe cargar un archivo");
       return;
     }
     const formdata = new FormData();
@@ -103,12 +94,7 @@ const UploadImages = () => {
         estaciones.estacion,
       formdata
     );
-    toast.info("Imagen agregada correctamente !", {
-      position: toast.POSITION.TOP_LEFT,
-      closeOnClick: false,
-      theme: "colored",
-      autoClose: 2000,
-    });
+    alertInfo("Imagen agregada correctamente");
     setUploadImage(true);
     inputFileRef.current.value = "";
     imgRef.current.src = "";

@@ -1,9 +1,10 @@
-import { useEffect, useState, useContext } from "react";
-import styles from "../styles/deleteStation.module.css";
-import axios from "axios";
-import { UserContext } from "../context/UserProvider";
-import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import styles from "../styles/deleteStation.module.css";
+import { ToastContainer } from "react-toastify";
+import axios from "axios";
+import { useEffect, useState, useContext } from "react";
+import { UserContext } from "../context/UserProvider";
+import { alertInfo, alertWarning } from "../utilities/Alerts";
 
 const DeleteStation = () => {
   const { upload, setUpload } = useContext(UserContext);
@@ -23,24 +24,14 @@ const DeleteStation = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (estaciones.estacion === "Seleccionar estación") {
-      toast.warning("Seleccione una estación", {
-        position: toast.POSITION.TOP_LEFT,
-        closeOnClick: false,
-        theme: "colored",
-        autoClose: 3000,
-      });
+      alertWarning("Seleccione una estación");
       return;
     }
     const res = await axios.delete(
       `https://zoratama-map.netlify.app/estaciones/${estaciones.estacion}`
     );
     setUpload(true);
-    toast.info("Estación eliminada correctamente", {
-      position: toast.POSITION.TOP_LEFT,
-      closeOnClick: false,
-      theme: "colored",
-      autoClose: 3000,
-    });
+    alertInfo("Estación eliminada correctamente");
   };
   const handleChange = (e) => {
     const { name, value } = e.target;

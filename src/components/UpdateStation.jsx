@@ -1,10 +1,10 @@
-import React, { useRef } from "react";
-import { useState, useEffect, useContext } from "react";
-import styles from "../styles/updateStation.module.css";
-import axios from "axios";
-import { UserContext } from "../context/UserProvider";
-import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import styles from "../styles/updateStation.module.css";
+import { ToastContainer } from "react-toastify";
+import axios from "axios";
+import { useState, useEffect, useContext, useRef } from "react";
+import { UserContext } from "../context/UserProvider";
+import { alertInfo, alertWarning } from "../utilities/Alerts";
 
 const UpdateStation = () => {
   const { upload, setUpload } = useContext(UserContext);
@@ -57,12 +57,7 @@ const UpdateStation = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (estacion === "Seleccionar estación") {
-      toast.warning("Seleccione una estación", {
-        position: toast.POSITION.TOP_LEFT,
-        closeOnClick: false,
-        theme: "colored",
-        autoClose: 3000,
-      });
+      alertWarning("Seleccione una estación");
       return;
     }
 
@@ -79,12 +74,7 @@ const UpdateStation = () => {
       latitud: "",
       descripcion: "",
     });
-    toast.warning("Estación actualizada correctamente", {
-      position: toast.POSITION.TOP_LEFT,
-      closeOnClick: false,
-      theme: "colored",
-      autoClose: 3000,
-    });
+    alertInfo("Estación actualizada correctamente");
   };
 
   const handleChange = (e) => {

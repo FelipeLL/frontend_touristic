@@ -1,11 +1,10 @@
 //import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.js";
 import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions";
 import "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css";
-import { useState } from "react";
 
 import { useControl } from "react-map-gl";
 
-export default function DirectionsControl({ currentPosition }) {
+export default function DirectionsControl() {
   const TOKEN =
     "pk.eyJ1IjoiamZlbGlwZWxhZGlubyIsImEiOiJjbDFmbHF1dzUwMXo1M2JudDQwNjVoNWw3In0.wiRr4CxecJHGtM18meygeQ";
 
@@ -24,13 +23,10 @@ export default function DirectionsControl({ currentPosition }) {
         country: "co",
       },
       controls: {
-        instructions: true,
+        instructions: false,
         inputs: true,
       },
     });
-    /* if (currentPosition) {
-      console.log(currentPosition.length);
-    } */
 
     return ctrl;
   });

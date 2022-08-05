@@ -1,33 +1,34 @@
+import "react-toastify/dist/ReactToastify.css";
 import styles from "../styles/imagenes.module.css";
-import { UserContext } from "../context/UserProvider";
-import { useContext, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faRectangleXmark,
   faCircleXmark,
   faDiamondTurnRight,
 } from "@fortawesome/free-solid-svg-icons";
+import { ToastContainer } from "react-toastify";
 import axios from "axios";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { useContext, useEffect, useState } from "react";
+import { UserContext } from "../context/UserProvider";
+import { alertInfo } from "../utilities/Alerts";
 
 const Station = ({ estacion, data, setSlider, setCurrentPosition }) => {
   //en el result se guarda la estación en especifico
   let result = data.filter((item) => item.ID_Estacion === estacion);
   const [imageList, setImageList] = useState([]);
   const { uploadImage, setUploadImage } = useContext(UserContext);
+  const { admin } = useContext(UserContext);
 
   const handleDeleteImage = async (index) => {
+<<<<<<< HEAD
     await axios.delete(
       `https://zoratama-map.netlify.app/estaciones/image/${index}`
     );
+=======
+    await axios.delete(`http://localhost:5000/estaciones/image/${index}`);
+>>>>>>> localMode
     setUploadImage(true);
-    toast.info("Imagen eliminada correctamente !", {
-      position: toast.POSITION.TOP_RIGHT,
-      closeOnClick: false,
-      theme: "colored",
-      autoClose: 2000,
-    });
+    alertInfo("Imagen eliminada correctamente");
   };
 
   const handleCurrentPosition = () => {
@@ -36,7 +37,7 @@ const Station = ({ estacion, data, setSlider, setCurrentPosition }) => {
       const res = await axios.get(
         "https://api.mapbox.com/directions/v5/mapbox/driving/-74.3604375%2C4.3208998%3B-74.353046%2C4.313163?alternatives=true&geometries=geojson&language=es&overview=simplified&steps=true&access_token=pk.eyJ1IjoiamZlbGlwZWxhZGlubyIsImEiOiJjbDFmbHF1dzUwMXo1M2JudDQwNjVoNWw3In0.wiRr4CxecJHGtM18meygeQ"
       );
-      console.log(res);
+      console.log(res.data);
     };
     const errorPosition = (err) => {
       console.log("Error obteniendo ubicación: ", err);
@@ -109,20 +110,30 @@ const Station = ({ estacion, data, setSlider, setCurrentPosition }) => {
             <p className={styles["content-text"]}>Indicaciones</p>
           </div>
         </div>
-
-        <div className={styles["lista-imagenes"]}>
-          {imageList.url &&
-            imageList.url.map((url, index) => (
-              <div key={imageList.id[index]}>
-                <img key={imageList.id[index]} src={url} alt="Imagen 1" />
-                <FontAwesomeIcon
-                  icon={faCircleXmark}
-                  className={`${styles["icon-img"]}`}
-                  onClick={() => handleDeleteImage(imageList.id[index])}
-                />
-              </div>
-            ))}
-        </div>
+        {admin ? (
+          <div className={styles["lista-imagenes"]}>
+            {imageList.url &&
+              imageList.url.map((url, index) => (
+                <div key={imageList.id[index]}>
+                  <img key={imageList.id[index]} src={url} alt="Imagen 1" />
+                  <FontAwesomeIcon
+                    icon={faCircleXmark}
+                    className={`${styles["icon-img"]}`}
+                    onClick={() => handleDeleteImage(imageList.id[index])}
+                  />
+                </div>
+              ))}
+          </div>
+        ) : (
+          <div className={styles["lista-imagenes"]}>
+            {imageList.url &&
+              imageList.url.map((url, index) => (
+                <div key={imageList.id[index]}>
+                  <img key={imageList.id[index]} src={url} alt="Imagen 1" />
+                </div>
+              ))}
+          </div>
+        )}
       </div>
       <ToastContainer />
     </>

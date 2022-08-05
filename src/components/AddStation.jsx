@@ -1,10 +1,11 @@
-import { useState, useContext } from "react";
-import { UserContext } from "../context/UserProvider";
-import styles from "../styles/addStation.module.css";
-import axios from "axios";
-import { useRef } from "react";
-import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import styles from "../styles/addStation.module.css";
+import { ToastContainer } from "react-toastify";
+import axios from "axios";
+import { useState, useContext, useRef } from "react";
+import { UserContext } from "../context/UserProvider";
+import { alertInfo, alertWarning } from "../utilities/Alerts";
+
 const AddStation = () => {
   const initialState = {
     nombre: "",
@@ -26,12 +27,7 @@ const AddStation = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!longitud.trim() || !latitud.trim() || !nombre.trim()) {
-      toast.warning("Complete todos los campos", {
-        position: toast.POSITION.TOP_LEFT,
-        closeOnClick: false,
-        theme: "colored",
-        autoClose: 3000,
-      });
+      alertWarning("Complete todos los campos");
       return;
     }
 
@@ -47,12 +43,7 @@ const AddStation = () => {
     inputLngRef.current.value = "";
     inputLatRef.current.value = "";
     inputDesRef.current.value = "";
-    toast.info("Estación agregada correctamente", {
-      position: toast.POSITION.TOP_LEFT,
-      closeOnClick: false,
-      theme: "colored",
-      autoClose: 3000,
-    });
+    alertInfo("Estación agregada correctamente");
   };
 
   const handleChange = (e) => {

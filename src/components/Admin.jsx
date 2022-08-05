@@ -1,6 +1,4 @@
-import React, { useState } from "react";
 import styles from "../styles/slider.module.css";
-import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMapLocationDot,
@@ -10,7 +8,8 @@ import {
   faCamera,
   faHandPointLeft,
 } from "@fortawesome/free-solid-svg-icons";
-
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { optionsAdmin } from "../utilities/optionsAdmin";
 
 const Admin = ({ sliderConfig, setSliderConfig }) => {
