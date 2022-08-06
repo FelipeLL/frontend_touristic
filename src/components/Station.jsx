@@ -20,13 +20,9 @@ const Station = ({ estacion, data, setSlider, setCurrentPosition }) => {
   const { admin } = useContext(UserContext);
 
   const handleDeleteImage = async (index) => {
-<<<<<<< HEAD
     await axios.delete(
       `https://zoratama-map.netlify.app/estaciones/image/${index}`
     );
-=======
-    await axios.delete(`http://localhost:5000/estaciones/image/${index}`);
->>>>>>> localMode
     setUploadImage(true);
     alertInfo("Imagen eliminada correctamente");
   };
