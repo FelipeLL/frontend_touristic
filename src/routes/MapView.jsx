@@ -21,7 +21,7 @@ const MapView = () => {
   const { upload, setUpload } = useContext(UserContext);
   useEffect(() => {
     const axiosData = async () => {
-      const URI = "https://zoratama-map.netlify.app/estaciones";
+      const URI = "https://zoratamamap.herokuapp.com/estaciones";
       const res = await axios.get(URI);
       setData(res.data);
       setUpload(false);

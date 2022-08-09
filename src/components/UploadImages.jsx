@@ -90,7 +90,7 @@ const UploadImages = () => {
     formdata.append("image", file);
 
     await axios.post(
-      "https://zoratama-map.netlify.app/estaciones/image/" +
+      "https://zoratamamap.herokuapp.com/estaciones/image/" +
         estaciones.estacion,
       formdata
     );

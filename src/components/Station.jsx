@@ -21,7 +21,7 @@ const Station = ({ estacion, data, setSlider, setCurrentPosition }) => {
 
   const handleDeleteImage = async (index) => {
     await axios.delete(
-      `https://zoratama-map.netlify.app/estaciones/image/${index}`
+      `https://zoratamamap.herokuapp.com/estaciones/image/${index}`
     );
     setUploadImage(true);
     alertInfo("Imagen eliminada correctamente");
@@ -53,7 +53,7 @@ const Station = ({ estacion, data, setSlider, setCurrentPosition }) => {
   useEffect(() => {
     const axiosData = async () => {
       const URI =
-        "https://zoratama-map.netlify.app/estaciones/image/" + estacion;
+        "https://zoratamamap.herokuapp.com/estaciones/image/" + estacion;
 
       const res = await axios.get(URI);
 

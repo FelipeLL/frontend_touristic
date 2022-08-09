@@ -62,7 +62,7 @@ const UpdateStation = () => {
     }
 
     await axios.put(
-      `https://zoratama-map.netlify.app/estaciones/${estacion}`,
+      `https://zoratamamap.herokuapp.com/estaciones/${estacion}`,
       estaciones
     );
     setUpload(true);

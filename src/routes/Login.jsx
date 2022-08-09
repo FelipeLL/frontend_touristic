@@ -21,7 +21,7 @@ const Login = () => {
   const { required } = formValidate();
   const navigate = useNavigate();
 
-  const URI = "https://zoratama-map.netlify.app/auth";
+  const URI = "https://zoratamamap.herokuapp.com/auth";
 
   const { setAdmin } = useContext(UserContext);
   const { online, setOnline } = useContext(UserContext);

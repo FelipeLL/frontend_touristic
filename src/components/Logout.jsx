@@ -5,7 +5,7 @@ import { faArrowRightToBracket } from "@fortawesome/free-solid-svg-icons";
 
 const Logout = () => {
   const cerrar = async () => {
-    const URI = "https://zoratama-map.netlify.app/auth/logout";
+    const URI = "https://zoratamamap.herokuapp.com/auth/logout";
     // const res = await axios.get(URI);
     await axios({
       method: "get",

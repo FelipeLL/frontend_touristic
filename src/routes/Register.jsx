@@ -10,7 +10,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Register = () => {
-  const URI = "https://zoratama-map.netlify.app/users/register";
+  const URI = "https://zoratamamap.herokuapp.com/users/register";
 
   const {
     register,

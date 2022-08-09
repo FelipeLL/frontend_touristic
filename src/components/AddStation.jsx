@@ -19,7 +19,7 @@ const AddStation = () => {
   const inputLatRef = useRef(null);
   const inputDesRef = useRef(null);
 
-  const URI = "https://zoratama-map.netlify.app/estaciones";
+  const URI = "https://zoratamamap.herokuapp.com/estaciones";
   const [estaciones, setEstaciones] = useState(initialState);
   const { setUpload } = useContext(UserContext);
   const { nombre, longitud, latitud } = estaciones;
