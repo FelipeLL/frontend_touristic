@@ -7,7 +7,18 @@ import { UserContext } from "../context/UserProvider";
 import { alertInfo, alertWarning } from "../utilities/Alerts";
 
 const UpdateStation = () => {
+  const initialState = {
+    estacion: "Seleccionar estación",
+    nombre: "",
+    longitud: "",
+    latitud: "",
+    descripcion: "",
+  };
   const { upload, setUpload } = useContext(UserContext);
+  const selectRef = useRef(null);
+  const [data, setData] = useState([]);
+  const [estaciones, setEstaciones] = useState(initialState);
+  const { estacion } = estaciones;
 
   useEffect(() => {
     const axiosData = async () => {
@@ -17,17 +28,6 @@ const UpdateStation = () => {
     };
     axiosData();
   }, [upload]);
-
-  const selectRef = useRef(null);
-  const [data, setData] = useState([]);
-  const [estaciones, setEstaciones] = useState({
-    estacion: "Seleccionar estación",
-    nombre: "",
-    longitud: "",
-    latitud: "",
-    descripcion: "",
-  });
-  const { estacion } = estaciones;
 
   useEffect(() => {
     const dataEstacion = data.filter(
@@ -44,13 +44,7 @@ const UpdateStation = () => {
 
       setEstaciones(datos);
     } else {
-      setEstaciones({
-        estacion: "Seleccionar estación",
-        nombre: "",
-        longitud: "",
-        latitud: "",
-        descripcion: "",
-      });
+      setEstaciones(initialState);
     }
   }, [estacion]);
 
@@ -67,13 +61,7 @@ const UpdateStation = () => {
     );
     setUpload(true);
     selectRef.current.value = "Seleccionar estación";
-    setEstaciones({
-      estacion: "Seleccionar estación",
-      nombre: "",
-      longitud: "",
-      latitud: "",
-      descripcion: "",
-    });
+    setEstaciones(initialState);
     alertInfo("Estación actualizada correctamente");
   };
 

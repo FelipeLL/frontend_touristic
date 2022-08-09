@@ -4,7 +4,7 @@ import { ToastContainer } from "react-toastify";
 import axios from "axios";
 import { useState, useContext, useRef } from "react";
 import { UserContext } from "../context/UserProvider";
-import { alertInfo, alertWarning } from "../utilities/Alerts";
+import { alertError, alertInfo, alertWarning } from "../utilities/Alerts";
 
 const AddStation = () => {
   const initialState = {
@@ -20,30 +20,32 @@ const AddStation = () => {
   const inputDesRef = useRef(null);
 
   const URI = "https://zoratamamap.herokuapp.com/estaciones";
+
   const [estaciones, setEstaciones] = useState(initialState);
   const { setUpload } = useContext(UserContext);
   const { nombre, longitud, latitud } = estaciones;
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!longitud.trim() || !latitud.trim() || !nombre.trim()) {
-      alertWarning("Complete todos los campos");
-      return;
-    }
+    try {
+      e.preventDefault();
+      if (!longitud.trim() || !latitud.trim() || !nombre.trim()) {
+        alertWarning("Complete todos los campos");
+        return;
+      }
 
-    await axios.post(URI, estaciones);
-    setUpload(true);
-    setEstaciones({
-      nombre: "",
-      descripcion: "",
-      longitud: "",
-      latitud: "",
-    });
-    inputNameRef.current.value = "";
-    inputLngRef.current.value = "";
-    inputLatRef.current.value = "";
-    inputDesRef.current.value = "";
-    alertInfo("Estación agregada correctamente");
+      await axios.post(URI, estaciones);
+      setUpload(true);
+      setEstaciones({
+        nombre: "",
+        descripcion: "",
+        longitud: "",
+        latitud: "",
+      });
+      handleResetValues();
+      alertInfo("Estación agregada correctamente");
+    } catch (error) {
+      alertError(error.response.data);
+    }
   };
 
   const handleChange = (e) => {
@@ -52,6 +54,13 @@ const AddStation = () => {
       ...old,
       [name]: value,
     }));
+  };
+
+  const handleResetValues = () => {
+    inputNameRef.current.value = "";
+    inputLngRef.current.value = "";
+    inputLatRef.current.value = "";
+    inputDesRef.current.value = "";
   };
 
   return (
