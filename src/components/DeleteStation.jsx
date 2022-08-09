@@ -8,6 +8,10 @@ import { alertInfo, alertWarning } from "../utilities/Alerts";
 
 const DeleteStation = () => {
   const { upload, setUpload } = useContext(UserContext);
+  const [data, setData] = useState([]);
+  const [estaciones, setEstaciones] = useState({
+    estacion: "Seleccionar estación",
+  });
   useEffect(() => {
     const axiosData = async () => {
       const URI = "http://localhost:5000/estaciones";
@@ -17,10 +21,6 @@ const DeleteStation = () => {
     axiosData();
   }, [upload]);
 
-  const [data, setData] = useState([]);
-  const [estaciones, setEstaciones] = useState({
-    estacion: "Seleccionar estación",
-  });
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (estaciones.estacion === "Seleccionar estación") {
@@ -33,6 +33,7 @@ const DeleteStation = () => {
     setUpload(true);
     alertInfo("Estación eliminada correctamente");
   };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEstaciones((old) => ({

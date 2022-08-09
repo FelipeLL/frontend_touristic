@@ -14,7 +14,6 @@ import { optionsAdmin } from "../utilities/optionsAdmin";
 
 const Admin = ({ sliderConfig, setSliderConfig }) => {
   const [siderOn, setSiderOn] = useState(true);
-
   const [option, setOption] = useState("1");
 
   return (

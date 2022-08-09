@@ -17,6 +17,7 @@ const UploadImages = () => {
     };
     axiosData();
   }, []);
+
   const { setUploadImage } = useContext(UserContext);
   const [fileName, setFileName] = useState(null);
   const [file, setFile] = useState(null);
