@@ -1,4 +1,5 @@
 import styles from "../styles/register.module.css";
+import logo from "../images/logo.svg";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -38,98 +39,103 @@ const Register = () => {
   };
 
   return (
-    <div className={styles.body}>
-      <div className={styles.wrapper}>
-        <h2 className={styles["titulo-h2"]}>Registrarse</h2>
-        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-          <div className={styles["input-box"]}>
-            <input
-              className={styles.input}
-              type="text"
-              placeholder="Nombre"
-              name="nombre"
-              {...register("nombre", {
-                required,
-              })}
-            />
+    <div className={styles.register}>
+      <div className={styles.content}>
+        <div className={styles["register-box"]}>
+          <div className={styles.header}>
+            <img src={logo} alt="logo" />
           </div>
-          {errors.nombre && <FormError error={errors.nombre} />}
-          <div className={styles["input-box"]}>
-            <input
-              className={styles.input}
-              type="text"
-              placeholder="Apellido"
-              name="apellido"
-              {...register("apellido", {
-                required,
-              })}
-            />
-          </div>
-          {errors.apellido && <FormError error={errors.apellido} />}
-          <div className={styles["input-box"]}>
-            <input
-              className={styles.input}
-              type="text"
-              placeholder="Teléfono"
-              name="telefono"
-              {...register("telefono", {
-                required,
-              })}
-            />
-          </div>
-          {errors.telefono && <FormError error={errors.telefono} />}
-          <div className={styles["input-box"]}>
-            <input
-              className={styles.input}
-              type="text"
-              placeholder="Correo electrónico"
-              name="correo"
-              {...register("correo", {
-                required,
-                pattern: patternEmail,
-              })}
-            />
-          </div>
-          {errors.correo && <FormError error={errors.correo} />}
-          <div className={styles["input-box"]}>
-            <input
-              className={styles.input}
-              type="password"
-              placeholder="Contraseña"
-              name="password"
-              {...register("password", {
-                minLength,
-                validate: validateTrim,
-                pattern: patternPassword,
-              })}
-            />
-          </div>
-          {errors.password && <FormError error={errors.password} />}
+          <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+            <div className={styles["input-box"]}>
+              <input
+                className={styles.input}
+                type="text"
+                placeholder="Nombre"
+                name="nombre"
+                {...register("nombre", {
+                  required,
+                })}
+              />
+            </div>
+            {errors.nombre && <FormError error={errors.nombre} />}
+            <div className={styles["input-box"]}>
+              <input
+                className={styles.input}
+                type="text"
+                placeholder="Apellido"
+                name="apellido"
+                {...register("apellido", {
+                  required,
+                })}
+              />
+            </div>
+            {errors.apellido && <FormError error={errors.apellido} />}
+            <div className={styles["input-box"]}>
+              <input
+                className={styles.input}
+                type="text"
+                placeholder="Teléfono"
+                name="telefono"
+                {...register("telefono", {
+                  required,
+                })}
+              />
+            </div>
+            {errors.telefono && <FormError error={errors.telefono} />}
+            <div className={styles["input-box"]}>
+              <input
+                className={styles.input}
+                type="text"
+                placeholder="Correo electrónico"
+                name="correo"
+                {...register("correo", {
+                  required,
+                  pattern: patternEmail,
+                })}
+              />
+            </div>
+            {errors.correo && <FormError error={errors.correo} />}
+            <div className={styles["input-box"]}>
+              <input
+                className={styles.input}
+                type="password"
+                placeholder="Contraseña"
+                name="password"
+                {...register("password", {
+                  minLength,
+                  validate: validateTrim,
+                  pattern: patternPassword,
+                })}
+              />
+            </div>
+            {errors.password && <FormError error={errors.password} />}
 
-          <div className={styles["input-box"]}>
-            <input
-              className={styles.input}
-              type="password"
-              placeholder="Confirmar contraseña"
-              name="confirmPassword"
-              {...register("confirmPassword", {
-                validate: validateEquals(getValues),
-              })}
-            />
-          </div>
-          {errors.confirmPassword && (
-            <FormError error={errors.confirmPassword} />
-          )}
+            <div className={styles["input-box"]}>
+              <input
+                className={styles.input}
+                type="password"
+                placeholder="Confirmar contraseña"
+                name="confirmPassword"
+                {...register("confirmPassword", {
+                  validate: validateEquals(getValues),
+                })}
+              />
+            </div>
+            {errors.confirmPassword && (
+              <FormError error={errors.confirmPassword} />
+            )}
 
-          <div className={styles["input-box"]}>
-            <button className={styles.button}>Registrarse</button>
-          </div>
-        </form>
-        <p className="d-inline-block mb-0 ">¿Ya tienes una cuenta?</p>
-        <Link to="/" className={styles["text-a"]}>
-          {" "}
-          Inicia sesión
-        </Link>
+            <span className={styles["button-box"]}>
+              <button>Registrarse</button>
+            </span>
+          </form>
+        </div>
+        <div className={styles["register-box"]}>
+          <p className={styles["text"]}>
+            ¿Ya tienes una cuenta?
+            <Link to="/">Iniciar sesión</Link>
+          </p>
+        </div>
       </div>
       <ToastContainer />
     </div>
