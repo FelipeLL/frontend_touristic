@@ -1,7 +1,7 @@
 import "react-toastify/dist/ReactToastify.css";
 import "../style.css";
 import styles from "../styles/login.module.css";
-import logo from "../images/logo-final_opt.svg";
+import logo from "../images/logo.svg";
 import { UserContext } from "../context/UserProvider";
 import { useContext, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
@@ -87,7 +87,7 @@ const Login = () => {
               {/* <!--IMAGEN 1--> */}
               <div
                 className="carousel-item img-1 min-vh-100 active"
-                data-bs-interval="3000"
+                data-bs-interval="2500"
               >
                 <div className="carousel-caption d-none d-md-block">
                   <h5 className="fw-bold">Descubre algo sorprendete</h5>
@@ -96,7 +96,7 @@ const Login = () => {
               {/* <!--IMAGEN 2--> */}
               <div
                 className="carousel-item img-2 min-vh-100"
-                data-bs-interval="3000"
+                data-bs-interval="2500"
               >
                 <div className="carousel-caption d-none d-md-block">
                   <h5 className="font-weight-bold">
@@ -107,7 +107,7 @@ const Login = () => {
               {/* <!--IMAGEN 3--> */}
               <div
                 className="carousel-item img-3 min-vh-100"
-                data-bs-interval="3000"
+                data-bs-interval="2500"
               >
                 <div className="carousel-caption d-none d-md-block">
                   <h5 className="font-weight-bold">
@@ -143,65 +143,67 @@ const Login = () => {
           </div>
         </div>
 
-        <div className="col-lg-5 d-flex flex-column align-items-end min-vh-100">
-          <div className="px-lg-5 pt-lg-4 pb-lg-3 p-2  w-100 ">
-            <img src={logo} alt="img-fluid" />
-          </div>
-
-          <div className="px-lg-5 py-lg-4 p-sm-4 p-2  w-100 align-self-center">
-            <h1 className="font-weight-bold pt-2 pt-sm-5 text-light">
-              Bienvenido de vuelta
-            </h1>
-
-            <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-              <label htmlFor="exampleInputEmail1" className={styles.text}>
-                Correo electronico
-              </label>
-
-              <div className={styles["input-box"]}>
-                <input
-                  className={styles.input}
-                  type="text"
-                  id="exampleInputEmail1"
-                  placeholder="Ingresa tu correo electrónico"
-                  name="email"
-                  {...register("email", {
-                    required,
-                  })}
-                />
+        <div className={`col-lg-5 ${styles.login}`}>
+          <div className={styles.content}>
+            <div className={styles["login-box"]}>
+              <div className={styles.header}>
+                <img src={logo} alt="logo" />
               </div>
-              {errors.email && <FormError error={errors.email} />}
-              <label htmlFor="exampleInputEmail2" className={styles.text}>
-                Contraseña
-              </label>
-              <div className={styles["input-box"]}>
-                <input
-                  className={styles.input}
-                  type="password"
-                  id="exampleInputEmail2"
-                  placeholder="Ingresa tu contraseña"
-                  name="password"
-                  {...register("password", {
-                    required,
-                  })}
-                />
-              </div>
-              {errors.password && <FormError error={errors.password} />}
 
-              <div className={styles["input-box"]}>
-                <button className={styles.button}>Iniciar Sesión</button>
-              </div>
-            </form>
-          </div>
+              <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+                <div className={styles["input-box"]}>
+                  <input
+                    className={styles.input}
+                    type="text"
+                    id="exampleInputEmail1"
+                    placeholder="Ingresa tu correo electrónico"
+                    name="email"
+                    {...register("email", {
+                      required,
+                    })}
+                  />
+                </div>
+                {errors.email && <FormError error={errors.email} />}
 
-          <div className="text-center px-lg-5 pt-lg-4  pb-lg-4 p-sm-4 p-3  w-100 ">
-            <p className={`d-inline-block mb-0 ${styles.link}`}>
-              ¿Todavia no tienes una cuenta?
-            </p>
-            <Link to="/register" className={styles["text-a"]}>
-              {" "}
-              Crea una ahora
-            </Link>
+                <div className={styles["input-box"]}>
+                  <input
+                    className={styles.input}
+                    type="password"
+                    id="exampleInputEmail2"
+                    placeholder="Ingresa tu contraseña"
+                    name="password"
+                    {...register("password", {
+                      required,
+                    })}
+                  />
+                </div>
+                {errors.password && <FormError error={errors.password} />}
+
+                <span className={styles["button-box"]}>
+                  <button>Iniciar Sesión</button>
+                </span>
+                <a className={styles.forgot} href="#">
+                  Forgot password?
+                </a>
+              </form>
+            </div>
+            <div className={styles["login-box"]}>
+              <p className={styles["text"]}>
+                ¿Todavía no tienes una cuenta?
+                <Link to="/register">Registrarse</Link>
+              </p>
+            </div>
+            <div className={styles.app}>
+              <p>Descarga la aplicación.</p>
+              <div className={styles["app-img"]}>
+                <a href="#">
+                  <img src="https://www.instagram.com/static/images/appstore-install-badges/badge_ios_english-en.png/4b70f6fae447.png" />
+                </a>
+                <a href="#">
+                  <img src="https://www.instagram.com/static/images/appstore-install-badges/badge_android_english-en.png/f06b908907d5.png" />
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
