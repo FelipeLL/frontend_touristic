@@ -28,3 +28,15 @@
   left: 5px;
   width: 97%;
 }
+
+@media screen and (max-width: 470px) {
+  .sidebar {
+    width: 400px;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .sidebar {
+    width: 350px;
+  }
+}

@@ -1,22 +1,21 @@
 .caja {
   position: relative;
-  height: 10px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+  height: 15px;
+  left: 36px;
 }
 
 .icon {
   position: absolute;
-  top: -8px;
+  top: -3px;
   left: 5px;
+  font-size: 13px;
   color: red;
 }
 
 .message {
   position: absolute;
   left: 28px;
-  top: -8px;
+  top: -5px;
   color: red;
   font-size: 12px;
 }
