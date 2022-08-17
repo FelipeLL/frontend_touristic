@@ -1,3 +1,7 @@
+.title {
+  padding-top: 50px;
+}
+
 .lista-imagenes img {
   width: 100%;
   object-fit: cover;
@@ -5,6 +9,7 @@
   height: 330px;
   margin-right: 10px;
   margin-top: 30px;
+  background-color: tomato;
 }
 .lista-imagenes div {
   position: relative;
@@ -43,7 +48,7 @@
 
 .icon {
   position: absolute;
-  top: -40px;
+  top: 5px;
   right: 0;
   font-size: 2.3em;
   cursor: pointer;
@@ -54,7 +59,6 @@
   align-items: stretch;
   width: 152px;
   height: 35px;
-
   border-radius: 15px;
   background-color: #1a1e24;
   color: white;
@@ -79,4 +83,39 @@
 
 .icon:hover {
   color: #1a83e6;
+}
+
+@media screen and (max-height: 700px) {
+  .title {
+    padding-top: 35px;
+  }
+  .mtop {
+    margin-top: 35px;
+  }
+  .lista-imagenes img {
+    height: 250px;
+    width: 200px;
+  }
+}
+
+@media screen and (max-height: 600px) {
+  .lista-imagenes img {
+    height: 200px;
+    width: 180px;
+  }
+}
+
+@media screen and (max-height: 520px) {
+  .title {
+    padding-top: 25px;
+    font-size: 20px;
+  }
+  .mtop {
+    margin-top: 20px;
+  }
+
+  .icon {
+    top: 0;
+    right: -3px;
+  }
 }

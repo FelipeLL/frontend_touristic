@@ -50,13 +50,15 @@ const Station = ({ estacion, data, setSlider, setCurrentPosition }) => {
 
   useEffect(() => {
     const axiosData = async () => {
-      const URI = "http://localhost:5000/estaciones/image/" + estacion;
+      if (estacion !== 0) {
+        const URI = "http://localhost:5000/estaciones/image/" + estacion;
 
-      const res = await axios.get(URI);
+        const res = await axios.get(URI);
 
-      setImageList(res.data);
+        setImageList(res.data);
 
-      setUploadImage(false);
+        setUploadImage(false);
+      }
     };
     axiosData();
   }, [estacion, uploadImage]);
@@ -68,7 +70,9 @@ const Station = ({ estacion, data, setSlider, setCurrentPosition }) => {
           key={item.ID_Estacion}
           style={{ borderBottom: "1px solid #d4d4d4" }}
         >
-          <h3 className="text-center my-5 fw-bold">{item.nombre}</h3>
+          <h3 className={`text-center fw-bold ${styles.title}`}>
+            {item.nombre}
+          </h3>
 
           <FontAwesomeIcon
             onClick={() => {
@@ -78,7 +82,7 @@ const Station = ({ estacion, data, setSlider, setCurrentPosition }) => {
             className={`${styles.icon}`}
           />
 
-          <div className="container ">
+          <div className="container">
             <div className={styles.mtop}>
               <p className="fs-6">{item.descripcion}</p>
             </div>
