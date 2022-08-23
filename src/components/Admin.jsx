@@ -47,7 +47,13 @@ const Admin = ({ sliderConfig, setSliderConfig }) => {
             </div>
 
             <div className={styles["menu-items"]}>
-              <ul className={styles["nav-links"]}>
+              <ul
+                className={
+                  siderOn
+                    ? `${styles["nav-links"]} ${styles.close}`
+                    : styles["nav-links"]
+                }
+              >
                 <li>
                   <Link to="" onClick={() => setOption("1")}>
                     <FontAwesomeIcon

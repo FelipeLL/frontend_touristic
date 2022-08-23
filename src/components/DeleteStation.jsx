@@ -61,11 +61,9 @@ const DeleteStation = () => {
       </select>
 
       <form onSubmit={handleSubmit}>
-        <div className={styles["input-box"]}>
-          <button type="submit" className={styles.button}>
-            Eliminar
-          </button>
-        </div>
+        <span className={styles["button-box"]}>
+          <button type="submit">Guardar</button>
+        </span>
       </form>
       <ToastContainer />
     </>

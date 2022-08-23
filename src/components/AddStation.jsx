@@ -73,7 +73,6 @@ const AddStation = () => {
 
             <div className={styles["input-box"]}>
               <input
-                className={`${styles["input"]} ${styles["nombre"]}`}
                 type="text"
                 id="exampleInputEmail1"
                 name="nombre"
@@ -91,7 +90,6 @@ const AddStation = () => {
 
             <div className={styles["input-box"]}>
               <input
-                className={styles.input}
                 type="text"
                 id="exampleInputEmail1"
                 name="longitud"
@@ -106,7 +104,6 @@ const AddStation = () => {
             </label>
             <div className={styles["input-box"]}>
               <input
-                className={styles.input}
                 type="text"
                 id="exampleInputEmail2"
                 name="latitud"
@@ -128,7 +125,6 @@ const AddStation = () => {
                 type="text"
                 cols="30"
                 rows="15"
-                className={styles.textArea}
                 onChange={handleChange}
                 ref={inputDesRef}
               />
@@ -137,9 +133,9 @@ const AddStation = () => {
         </div>
 
         <div className={styles["input-box-2"]}>
-          <button type="submit" className={styles.button}>
-            Agregar
-          </button>
+          <span className={styles["button-box"]}>
+            <button type="submit">Guardar</button>
+          </span>
         </div>
       </form>
 

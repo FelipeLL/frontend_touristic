@@ -79,6 +79,11 @@
   cursor: pointer;
 }
 
+.button-box button:hover {
+  border: 1px solid #1786ed;
+  background: #1786ed;
+}
+
 .forgot,
 .forgot:active,
 .forgot:hover,

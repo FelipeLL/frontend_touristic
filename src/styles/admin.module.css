@@ -83,7 +83,13 @@
 
 .nav-links {
   position: absolute;
-  left: -36px;
+  left: -30px;
+}
+
+.close .nav-links {
+  position: absolute;
+  left: -30px;
+  width: 95px;
 }
 
 .close .link-name {
@@ -138,6 +144,7 @@
   left: 65px;
   width: 83.5%;
 }
+
 @media screen and (max-height: 530px) {
   .menu-items {
     margin-top: 30px;
@@ -155,13 +162,15 @@
     min-width: 35px;
   }
   .dashboard {
-    width: 80.5%;
+    width: 86%;
+    left: 44px;
   }
   .close {
     width: 40px;
   }
-  .nav-links {
+  .close .nav-links {
     left: -38px;
+    width: 75px;
   }
   .link-name {
     font-size: 16px;
