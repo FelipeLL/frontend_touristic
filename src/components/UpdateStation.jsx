@@ -99,7 +99,6 @@ const UpdateStation = () => {
 
             <div className={styles["input-box"]}>
               <input
-                className={`${styles["input"]} ${styles["nombre"]}`}
                 type="text"
                 id="exampleInputEmail30"
                 name="nombre"
@@ -117,7 +116,6 @@ const UpdateStation = () => {
 
             <div className={styles["input-box"]}>
               <input
-                className={styles.input}
                 type="text"
                 id="exampleInputEmail31"
                 name="longitud"
@@ -132,7 +130,6 @@ const UpdateStation = () => {
             </label>
             <div className={styles["input-box"]}>
               <input
-                className={styles.input}
                 type="text"
                 id="exampleInputEmail32"
                 name="latitud"
@@ -155,18 +152,15 @@ const UpdateStation = () => {
                 type="text"
                 cols="30"
                 rows="10"
-                className={styles.textArea}
                 onChange={handleChange}
               />
             </div>
           </div>
         </div>
 
-        <div className={styles["input-box-2"]}>
-          <button type="submit" className={styles.button}>
-            Actualizar
-          </button>
-        </div>
+        <span className={styles["button-box"]}>
+          <button type="submit">Actualizar</button>
+        </span>
       </form>
       <ToastContainer />
     </>

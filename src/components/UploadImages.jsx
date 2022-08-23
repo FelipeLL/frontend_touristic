@@ -162,19 +162,19 @@ const UploadImages = () => {
           </div>
         </div>
       </div>
-      <input
-        type="file"
-        className={styles["custom-input"]}
-        onChange={handleFileChange}
-        accept=".jpg, .jpeg, .gif, .png"
-        ref={inputFileRef}
-      />
+      <div className={styles["container-custom-input"]}>
+        <input
+          type="file"
+          className={styles["custom-input"]}
+          onChange={handleFileChange}
+          accept=".jpg, .jpeg, .gif, .png"
+          ref={inputFileRef}
+        />
+      </div>
       <form onSubmit={handleSubmit}>
-        <div className={styles["input-box"]}>
-          <button type="submit" className={styles.button}>
-            Guardar
-          </button>
-        </div>
+        <span className={styles["button-box"]}>
+          <button type="submit">Guardar</button>
+        </span>
       </form>
       <ToastContainer />
     </div>
