@@ -1,4 +1,4 @@
-import styles from "../styles/slider.module.css";
+import styles from "../styles/admin.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMapLocationDot,
@@ -43,13 +43,17 @@ const Admin = ({ sliderConfig, setSliderConfig }) => {
                 />
               </div>
 
-              <span className={styles["logo_name"]}>
-                Administrar estaciones
-              </span>
+              <span className={styles["logo_name"]}>Administración</span>
             </div>
 
             <div className={styles["menu-items"]}>
-              <ul className={styles["nav-links"]}>
+              <ul
+                className={
+                  siderOn
+                    ? `${styles["nav-links"]} ${styles.close}`
+                    : styles["nav-links"]
+                }
+              >
                 <li>
                   <Link to="" onClick={() => setOption("1")}>
                     <FontAwesomeIcon
