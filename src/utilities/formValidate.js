@@ -16,7 +16,7 @@ export const formValidate = (getValues) => {
         },
         minLength: {
             value: 12,
-            message: "La contraseña debe contener mínimo 8 caracteres",
+            message: "La contraseña debe contener mínimo 12 caracteres",
         },
         validateTrim: {
 

@@ -34,7 +34,7 @@ const Register = () => {
       await axios.post(URI, data);
       alertSuccess(`La cuenta ha sido creada satisfactoriamente`);
     } catch (error) {
-      alertError(error.response.data.message);
+      alertError(error.response.data);
     }
   };
 

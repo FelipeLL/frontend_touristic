@@ -91,7 +91,7 @@ const UploadImages = () => {
     formdata.append("image", file);
 
     await axios.post(
-      "http://localhost:5000/estaciones/image/" + estaciones.estacion,
+      "http://localhost:5000/images/upload/" + estaciones.estacion,
       formdata
     );
     alertInfo("Imagen agregada correctamente");

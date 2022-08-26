@@ -12,47 +12,27 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/UserProvider";
 import { alertInfo } from "../utilities/Alerts";
 
-const Station = ({ estacion, data, setSlider, setCurrentPosition }) => {
+const Station = ({ estacion, data, setSlider }) => {
   //en el result se guarda la estación en especifico
   let result = data.filter((item) => item.ID_Estacion === estacion);
   const [imageList, setImageList] = useState([]);
   const { uploadImage, setUploadImage } = useContext(UserContext);
   const { admin } = useContext(UserContext);
 
-  const handleDeleteImage = async (index) => {
-    await axios.delete(`http://localhost:5000/estaciones/image/${index}`);
+  const handleDeleteImage = async (index, name) => {
+    await axios.delete(`http://localhost:5000/images/${index}`, {
+      data: {
+        name,
+      },
+    });
     setUploadImage(true);
     alertInfo("Imagen eliminada correctamente");
-  };
-
-  const handleCurrentPosition = () => {
-    const accessPosition = async (position) => {
-      setCurrentPosition([position.coords.longitude, position.coords.latitude]);
-      const res = await axios.get(
-        "https://api.mapbox.com/directions/v5/mapbox/driving/-74.3604375%2C4.3208998%3B-74.353046%2C4.313163?alternatives=true&geometries=geojson&language=es&overview=simplified&steps=true&access_token=pk.eyJ1IjoiamZlbGlwZWxhZGlubyIsImEiOiJjbDFmbHF1dzUwMXo1M2JudDQwNjVoNWw3In0.wiRr4CxecJHGtM18meygeQ"
-      );
-      console.log(res.data);
-    };
-    const errorPosition = (err) => {
-      console.log("Error obteniendo ubicación: ", err);
-    };
-    const optionsRequest = {
-      enableHighAccuracy: true, // Alta precisión
-      maximumAge: 0, // No queremos caché
-      timeout: 5000, // Esperar solo 5 segundos
-    };
-    navigator.geolocation.getCurrentPosition(
-      accessPosition,
-      errorPosition,
-      optionsRequest
-    );
   };
 
   useEffect(() => {
     const axiosData = async () => {
       if (estacion !== 0) {
-        const URI = "http://localhost:5000/estaciones/image/" + estacion;
-
+        const URI = "http://localhost:5000/images/" + estacion;
         const res = await axios.get(URI);
 
         setImageList(res.data);
@@ -97,7 +77,7 @@ const Station = ({ estacion, data, setSlider, setCurrentPosition }) => {
             height: "50px",
           }}
         >
-          <div className={styles.content} onClick={handleCurrentPosition}>
+          <div className={styles.content}>
             <span>
               <FontAwesomeIcon
                 icon={faDiamondTurnRight}
@@ -109,26 +89,24 @@ const Station = ({ estacion, data, setSlider, setCurrentPosition }) => {
         </div>
         {admin ? (
           <div className={styles["lista-imagenes"]}>
-            {imageList.url &&
-              imageList.url.map((url, index) => (
-                <div key={imageList.id[index]}>
-                  <img key={imageList.id[index]} src={url} alt="Imagen 1" />
-                  <FontAwesomeIcon
-                    icon={faCircleXmark}
-                    className={`${styles["icon-img"]}`}
-                    onClick={() => handleDeleteImage(imageList.id[index])}
-                  />
-                </div>
-              ))}
+            {imageList.map((image) => (
+              <div key={image.ID_Imagen}>
+                <img src={image.url} alt="Imagen 1" />
+                <FontAwesomeIcon
+                  icon={faCircleXmark}
+                  className={`${styles["icon-img"]}`}
+                  onClick={() => handleDeleteImage(image.ID_Imagen, image.name)}
+                />
+              </div>
+            ))}
           </div>
         ) : (
           <div className={styles["lista-imagenes"]}>
-            {imageList.url &&
-              imageList.url.map((url, index) => (
-                <div key={imageList.id[index]}>
-                  <img key={imageList.id[index]} src={url} alt="Imagen 1" />
-                </div>
-              ))}
+            {imageList.map((image) => (
+              <div key={image.ID_Imagen}>
+                <img src={image.url} alt="Imagen 1" />
+              </div>
+            ))}
           </div>
         )}
       </div>

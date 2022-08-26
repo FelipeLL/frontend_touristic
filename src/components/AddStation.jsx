@@ -42,7 +42,7 @@ const AddStation = () => {
       handleResetValues();
       alertInfo("Estación agregada correctamente");
     } catch (error) {
-      alertError(error.response.data);
+      alertError(error.response.data.error);
     }
   };
 
