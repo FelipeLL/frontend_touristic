@@ -38,11 +38,10 @@ const Login = () => {
         data,
         withCredentials: true,
       });
-
-      setOnline(res.data.isOnline);
-      setAdmin(res.data.isAdmin);
+      setOnline(res.data.results.isOnline);
+      setAdmin(res.data.results.isAdmin);
     } catch (error) {
-      alertError(error.response.data.message);
+      alertError(error.response.data);
     }
   };
 

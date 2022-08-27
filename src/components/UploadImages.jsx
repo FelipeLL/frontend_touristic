@@ -91,8 +91,8 @@ const UploadImages = () => {
     formdata.append("image", file);
 
     await axios.post(
-      "https://zoratamamap.herokuapp.com/estaciones/image/" +
-        estaciones.estacion,
+      "https://zoratamamap.herokuapp.com/images/upload/" + estaciones.estacion,
+
       formdata
     );
     alertInfo("Imagen agregada correctamente");
