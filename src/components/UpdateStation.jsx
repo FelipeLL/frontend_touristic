@@ -22,7 +22,7 @@ const UpdateStation = () => {
 
   useEffect(() => {
     const axiosData = async () => {
-      const URI = "onClick={handleCurrentPosition}/estaciones";
+      const URI = "https://zoratamamap.herokuapp.com/estaciones";
       const res = await axios.get(URI);
       setData(res.data);
     };
