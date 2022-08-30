@@ -4,12 +4,14 @@ import axios from "axios";
 import { point } from "@turf/helpers";
 import GeocoderControl from "../components/GeocoderControl";
 import DirectionsControl from "../components/DirectionsControl";
-import Slider from "../components/Slider";
+import SliderStation from "../components/SliderStation";
 import Admin from "../components/Admin";
 import { UserContext } from "../context/UserProvider";
 import Logout from "../components/Logout";
 import OpenConfig from "../components/OpenConfig";
 import Point from "../components/Point";
+import OpenProfile from "../components/OpenProfile";
+import Profile from "../components/Profile";
 
 const MapView = () => {
   //estado inicial de la vista
@@ -31,12 +33,11 @@ const MapView = () => {
 
   //establecer vista
   const [viewState, setViewState] = useState(initialState);
-  const [slider, setSlider] = useState(false);
+  const [sliderStation, setSliderStation] = useState(false);
   const [sliderConfig, setSliderConfig] = useState(false);
+  const [sliderProfile, setSliderProfile] = useState(false);
   const [data, setData] = useState([]);
-
   const [estacion, setEstacion] = useState(0);
-  const [currentPosition, setCurrentPosition] = useState([]);
   const { admin } = useContext(UserContext);
   //establecen los limites del mapa
   const bounds = [
@@ -53,7 +54,7 @@ const MapView = () => {
         latitude={estacion.latitud}
         color="#fff"
         onClick={() => {
-          setSlider(true);
+          setSliderStation(true);
           setEstacion(estacion.ID_Estacion);
         }}
       >
@@ -90,16 +91,15 @@ const MapView = () => {
       >
         {markers}
 
-        <Slider
-          slider={slider}
-          setSlider={setSlider}
+        <SliderStation
+          sliderStation={sliderStation}
+          setSliderStation={setSliderStation}
           estacion={estacion}
           data={data}
-          setCurrentPosition={setCurrentPosition}
         />
 
         {/* Si es admin muestra el icono y el slider de administrador */}
-        {admin && (
+        {admin ? (
           <>
             <Admin
               sliderConfig={sliderConfig}
@@ -107,13 +107,24 @@ const MapView = () => {
             />
             <OpenConfig setSliderConfig={setSliderConfig} />
           </>
+        ) : (
+          <>
+            <Profile
+              sliderProfile={sliderProfile}
+              setSliderProfile={setSliderProfile}
+            />
+            <OpenProfile
+              sliderProfile={sliderProfile}
+              setSliderProfile={setSliderProfile}
+            />
+          </>
         )}
 
         {data.length !== 0 ? (
           <>
             <GeocoderControl estacionesGeoJSON={estacionesGeoJSON} />
 
-            <DirectionsControl currentPosition={currentPosition} />
+            <DirectionsControl />
           </>
         ) : (
           console.log("no hay datos")
@@ -122,14 +133,6 @@ const MapView = () => {
           position="top-left"
           trackUserLocation="true"
           showUserHeading="true"
-          /* onGeolocate={(e) => {
-            let location = {
-              longitude: e.coords.longitude,
-              latitude: e.coords.latitude,
-            };
-
-            setGeoLocation(location);
-          }} */
         />
 
         <Logout />

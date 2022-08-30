@@ -1,12 +1,14 @@
 import styles from "../styles/station.module.css";
 import Station from "./Station";
 
-const Slider = ({ slider, setSlider, estacion, data, setCurrentPosition }) => {
+const Slider = ({ sliderStation, setSliderStation, estacion, data }) => {
   return (
     <>
       <div
         className={
-          slider ? `${styles.sidebar}` : `${styles.sidebar} ${styles.collapse}`
+          sliderStation
+            ? `${styles.sidebar}`
+            : `${styles.sidebar} ${styles.collapse}`
         }
       >
         <div className={`${styles["sidebar-content"]}`}>
@@ -14,8 +16,7 @@ const Slider = ({ slider, setSlider, estacion, data, setCurrentPosition }) => {
             <Station
               estacion={estacion}
               data={data}
-              setSlider={setSlider}
-              setCurrentPosition={setCurrentPosition}
+              setSliderStation={setSliderStation}
             />
           </div>
         </div>

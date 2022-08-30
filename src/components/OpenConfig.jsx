@@ -1,4 +1,4 @@
-import styles from "../styles/openConfig.module.css";
+import styles from "../styles/openButtons.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear } from "@fortawesome/free-solid-svg-icons";
 

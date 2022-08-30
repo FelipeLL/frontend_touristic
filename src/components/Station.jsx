@@ -12,7 +12,7 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/UserProvider";
 import { alertInfo } from "../utilities/Alerts";
 
-const Station = ({ estacion, data, setSlider }) => {
+const Station = ({ estacion, data, setSliderStation }) => {
   //en el result se guarda la estación en especifico
   let result = data.filter((item) => item.ID_Estacion === estacion);
   const [imageList, setImageList] = useState([]);
@@ -56,7 +56,7 @@ const Station = ({ estacion, data, setSlider }) => {
 
           <FontAwesomeIcon
             onClick={() => {
-              setSlider(false);
+              setSliderStation(false);
             }}
             icon={faRectangleXmark}
             className={`${styles.icon}`}
