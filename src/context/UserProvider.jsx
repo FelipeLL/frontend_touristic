@@ -4,8 +4,10 @@ export const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
   const [online, setOnline] = useState(false);
+  const [idUser, setIdUser] = useState("");
   const [admin, setAdmin] = useState(false);
   const [upload, setUpload] = useState(false);
+  const [uploadProfile, setUploadProfile] = useState(false);
   const [uploadImage, setUploadImage] = useState(false);
 
   useEffect(() => {
@@ -20,8 +22,8 @@ const UserProvider = ({ children }) => {
       withCredentials: true,
     });
     if (res.data.isToken) {
+      setIdUser(res.data.idUser);
       res.data.isAdmin && setAdmin(true);
-
       setOnline(true);
     } else {
       setOnline(null);
@@ -38,6 +40,10 @@ const UserProvider = ({ children }) => {
         setUploadImage,
         admin,
         setAdmin,
+        idUser,
+        setIdUser,
+        uploadProfile,
+        setUploadProfile,
       }}
     >
       {children}

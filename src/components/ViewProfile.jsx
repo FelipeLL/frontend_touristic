@@ -1,6 +1,6 @@
 import profile from "../images/profile_1.jpg";
 import styles from "../styles/viewProfile.module.css";
-const ViewProfile = () => {
+const ViewProfile = ({ userData }) => {
   return (
     <div
       className={`${styles.profile} ${styles["profile-card"]}  ${styles.shadow}   `}
@@ -9,10 +9,13 @@ const ViewProfile = () => {
       <div className={`${styles["profile-circular"]}`}>
         <img src={profile} alt="profile" />
       </div>
-      <p className={styles["profile-text"]}>Felipe Ladino</p>
+      <p className={styles["profile-text"]}>
+        {userData.length !== 0 &&
+          `${userData[0].nombre} ${userData[0].apellido}`}
+      </p>
       <div className={styles["profile-contact"]}>
-        <p>(+57) 3009764512</p>
-        <p>perfil@gmail.com</p>
+        <p>(+57) {userData.length !== 0 && userData[0].telefono}</p>
+        <p>{userData.length !== 0 && userData[0].correo}</p>
       </div>
     </div>
   );

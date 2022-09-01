@@ -1,20 +1,51 @@
 import styles from "../styles/profile.module.css";
+import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAddressCard,
   faBars,
   faKey,
-  faLayerGroup,
   faUser,
   faHandPointLeft,
 } from "@fortawesome/free-solid-svg-icons";
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { optionsProfile } from "../utilities/optionsProfile";
+import { UserContext } from "../context/UserProvider";
 
 const Profile = ({ sliderProfile, setSliderProfile }) => {
   const [siderOn, setSiderOn] = useState(true);
   const [option, setOption] = useState("1");
+  const [userData, setUserData] = useState([]);
+  const { idUser, setIdUser } = useContext(UserContext);
+  const { uploadProfile, setUploadProfile } = useContext(UserContext);
+
+  useEffect(() => {
+    readToken();
+  }, []);
+
+  useEffect(() => {
+    const getDataUser = async () => {
+      const URI = "http://localhost:5000/users/getOne/" + idUser;
+      const res = await axios.get(URI);
+      setUserData(res.data);
+      setUploadProfile(false);
+    };
+    if (idUser !== "") {
+      getDataUser();
+    }
+  }, [idUser, uploadProfile]);
+
+  const readToken = async () => {
+    const res = await axios({
+      method: "get",
+      url: "http://localhost:5000/auth",
+      withCredentials: true,
+    });
+    if (res.data.isToken) {
+      setIdUser(res.data.idUser);
+    }
+  };
 
   return (
     <div
@@ -40,7 +71,7 @@ const Profile = ({ sliderProfile, setSliderProfile }) => {
               />
             </div>
 
-            <span className={styles["logo_name"]}>Perfil</span>
+            <span className={styles["logo_name"]}>Perfil </span>
           </div>
 
           <div className={styles["menu-items"]}>
@@ -89,7 +120,9 @@ const Profile = ({ sliderProfile, setSliderProfile }) => {
           </div>
         </nav>
 
-        <section className={styles.dashboard}>{optionsProfile(option)}</section>
+        <section className={styles.dashboard}>
+          {optionsProfile(option, userData)}
+        </section>
       </div>
     </div>
   );
