@@ -11,7 +11,7 @@ import { alertInfo, alertWarning } from "../utilities/Alerts";
 const UploadImages = () => {
   useEffect(() => {
     const axiosData = async () => {
-      const URI = "https://zoratamamap.herokuapp.com/estaciones";
+      const URI = "https://zoratamamap.herokuapp.com/api/estaciones";
       const res = await axios.get(URI);
       setData(res.data);
     };
@@ -91,7 +91,8 @@ const UploadImages = () => {
     formdata.append("image", file);
 
     await axios.post(
-      "https://zoratamamap.herokuapp.com/images/upload/" + estaciones.estacion,
+      "https://zoratamamap.herokuapp.com/api/images/upload/" +
+        estaciones.estacion,
 
       formdata
     );

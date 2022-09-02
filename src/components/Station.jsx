@@ -20,11 +20,14 @@ const Station = ({ estacion, data, setSliderStation }) => {
   const { admin } = useContext(UserContext);
 
   const handleDeleteImage = async (index, name) => {
-    await axios.delete(`https://zoratamamap.herokuapp.com/images/${index}`, {
-      data: {
-        name,
-      },
-    });
+    await axios.delete(
+      `https://zoratamamap.herokuapp.com/api/images/${index}`,
+      {
+        data: {
+          name,
+        },
+      }
+    );
 
     setUploadImage(true);
     alertInfo("Imagen eliminada correctamente");
@@ -33,7 +36,7 @@ const Station = ({ estacion, data, setSliderStation }) => {
   useEffect(() => {
     const axiosData = async () => {
       if (estacion !== 0) {
-        const URI = "https://zoratamamap.herokuapp.com/images/" + estacion;
+        const URI = "https://zoratamamap.herokuapp.com/api/images/" + estacion;
 
         const res = await axios.get(URI);
 

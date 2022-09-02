@@ -14,7 +14,7 @@ const DeleteStation = () => {
   });
   useEffect(() => {
     const axiosData = async () => {
-      const URI = "https://zoratamamap.herokuapp.com/estaciones";
+      const URI = "https://zoratamamap.herokuapp.com/api/estaciones";
       const res = await axios.get(URI);
       setData(res.data);
     };
@@ -28,7 +28,7 @@ const DeleteStation = () => {
       return;
     }
     const res = await axios.delete(
-      `https://zoratamamap.herokuapp.com/estaciones/${estaciones.estacion}`
+      `https://zoratamamap.herokuapp.com/api/estaciones/${estaciones.estacion}`
     );
     setUpload(true);
     alertInfo("Estación eliminada correctamente");

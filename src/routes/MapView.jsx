@@ -23,7 +23,7 @@ const MapView = () => {
   const { upload, setUpload } = useContext(UserContext);
   useEffect(() => {
     const axiosData = async () => {
-      const URI = "https://zoratamamap.herokuapp.com/estaciones";
+      const URI = "https://zoratamamap.herokuapp.com/api/estaciones";
       const res = await axios.get(URI);
       setData(res.data);
       setUpload(false);
