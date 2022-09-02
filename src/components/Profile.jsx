@@ -26,7 +26,7 @@ const Profile = ({ sliderProfile, setSliderProfile }) => {
 
   useEffect(() => {
     const getDataUser = async () => {
-      const URI = "http://localhost:5000/users/getOne/" + idUser;
+      const URI = "https://zoratamamap.herokuapp.com/users/getOne/" + idUser;
       const res = await axios.get(URI);
       setUserData(res.data);
       setUploadProfile(false);
@@ -39,7 +39,7 @@ const Profile = ({ sliderProfile, setSliderProfile }) => {
   const readToken = async () => {
     const res = await axios({
       method: "get",
-      url: "http://localhost:5000/auth",
+      url: "https://zoratamamap.herokuapp.com/auth",
       withCredentials: true,
     });
     if (res.data.isToken) {

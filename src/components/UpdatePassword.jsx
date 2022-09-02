@@ -32,7 +32,8 @@ const UpdatePassword = ({ userData }) => {
       }
 
       const URI =
-        "http://localhost:5000/users/password/" + userData[0].ID_Usuario;
+        "https://zoratamamap.herokuapp.com/users/password/" +
+        userData[0].ID_Usuario;
       const res = await axios.put(URI, { currentPassword, newPassword });
 
       handleResetValues();

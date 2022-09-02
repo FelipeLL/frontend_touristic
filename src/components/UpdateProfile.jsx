@@ -28,7 +28,7 @@ const UpdateProfile = ({ userData }) => {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      const URI = `http://localhost:5000/users/${userData[0].ID_Usuario}`;
+      const URI = `https://zoratamamap.herokuapp.com/users/${userData[0].ID_Usuario}`;
       const res = await axios.put(URI, user);
       alertSuccess(res.data.results.message);
       setUploadProfile(true);
