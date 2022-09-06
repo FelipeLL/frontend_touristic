@@ -1,7 +1,7 @@
 import styles from "../styles/updateProfile.module.css";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import { UserContext } from "../context/UserProvider";
 import { alertError, alertSuccess } from "../utilities/Alerts";
 import { ToastContainer } from "react-toastify";

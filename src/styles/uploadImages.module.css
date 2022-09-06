@@ -215,7 +215,7 @@
   }
 }
 
-::-webkit-file-upload-button {
+/* ::-webkit-file-upload-button {
   width: 145px;
   padding: 9px;
   border: none;
@@ -230,4 +230,4 @@
 
 ::-webkit-file-upload-button:hover {
   background: linear-gradient(135deg, #1a83e6 40%, #1a1e24 100%);
-}
+} */
