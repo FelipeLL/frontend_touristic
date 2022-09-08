@@ -58,7 +58,8 @@ const MapView = () => {
           setEstacion(estacion.ID_Estacion);
         }}
       >
-        <Point />
+        {/* <Point svg={"animal"} /> */}
+        <img src={estacion.icono.url} alt="img" />
       </Marker>
     ));
   }, [data]);
