@@ -63,6 +63,18 @@ const ViewProfile = ({ userData }) => {
     inputFileRef.current.click();
   };
 
+  const handleDeleteAccount = async () => {
+    try {
+      await axios({
+        method: "delete",
+        url: `http://localhost:5000/users/${userData[0].ID_Usuario}`,
+        withCredentials: true,
+      });
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  };
+
   return (
     <div className={`${styles.profile} ${styles["profile-card"]}     `}>
       <div className={styles["profile-title"]}>PERFIL</div>
@@ -100,9 +112,27 @@ const ViewProfile = ({ userData }) => {
         <p>{userData.length !== 0 && userData[0].correo}</p>
       </div>
       <div className={styles["buttons-profile"]}>
-        <span className={styles["button-box"]}>
-          <button className={styles["button-delete"]}>Eliminar cuenta</button>
-        </span>
+        <div className="dropdown">
+          <button
+            className={`dropdown-toggle ${styles["btn-dropdown"]}`}
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Eliminar cuenta
+          </button>
+          <ul className={`dropdown-menu ${styles["drop-menu"]}`}>
+            <li>
+              <a
+                className={`dropdown-item`}
+                onClick={handleDeleteAccount}
+                href="/"
+              >
+                Eliminar
+              </a>
+            </li>
+          </ul>
+        </div>
         <form onSubmit={handleSubmit}>
           <span className={styles["button-box"]}>
             <button className={styles["button-update"]}>
