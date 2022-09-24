@@ -2,11 +2,11 @@ import "react-toastify/dist/ReactToastify.css";
 import styles from "../styles/uploadImages.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCloudArrowUp, faXmark } from "@fortawesome/free-solid-svg-icons";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
 import React, { useState, useRef, useEffect, useContext } from "react";
 import { UserContext } from "../context/UserProvider";
-import { alertInfo, alertWarning } from "../utilities/Alerts";
+import { alertWarning } from "../utilities/Alerts";
 
 const UploadImages = () => {
   useEffect(() => {
@@ -31,7 +31,6 @@ const UploadImages = () => {
   const selectRef = useRef(null);
 
   const handleFileChange = (e) => {
-    console.log(e.target.files);
     const [file] = e.target.files;
     if (!file) {
       console.log("necesitas cargar un archivo");
@@ -90,12 +89,20 @@ const UploadImages = () => {
     }
     const formdata = new FormData();
     formdata.append("image", file);
-
-    await axios.post(
-      "http://localhost:5000/images/upload/" + estaciones.estacion,
-      formdata
+    await toast.promise(
+      axios.post(
+        "http://localhost:5000/images/upload/" + estaciones.estacion,
+        formdata
+      ),
+      {
+        pending: "La imagen se esta subiendo",
+        success: "Se ha subido la imagen 👌",
+        error: "Error al cargar la imagen 🤯",
+      },
+      {
+        position: toast.POSITION.TOP_LEFT,
+      }
     );
-    alertInfo("Imagen agregada correctamente");
     setUploadImage(true);
     inputFileRef.current.value = "";
     imgRef.current.src = "";
