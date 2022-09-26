@@ -1,3 +1,23 @@
+.img-1 {
+  /*Propiedades de la imagen 1 del primer slider*/
+  background-image: url("../images/Ruta1.jpeg");
+  background-size: cover;
+  background-position: center;
+}
+
+.img-2 {
+  /*Propiedades de la imagen 1 del primer slider*/
+  background-image: url("../images/Ruta2.jpeg");
+  background-size: cover;
+  background-position: center;
+}
+.img-3 {
+  /*Propiedades de la imagen 1 del primer slider*/
+  background-image: url("../images/Ruta3.jpeg");
+  background-size: cover;
+  background-position: center;
+}
+
 .login {
   display: flex;
   align-items: center;
@@ -82,17 +102,6 @@
 .button-box button:hover {
   border: 1px solid #1786ed;
   background: #1786ed;
-}
-
-.forgot,
-.forgot:active,
-.forgot:hover,
-.forgot:visited {
-  margin-top: 12px;
-  font-size: 13px;
-  text-align: center;
-  line-height: 14px;
-  color: #3897f0;
 }
 
 .text {

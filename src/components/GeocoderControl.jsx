@@ -12,13 +12,7 @@ export default function GeocoderControl({ estacionesGeoJSON }) {
     for (var i = 0; i < estacionesGeoJSON.features.length; i++) {
       var feature = estacionesGeoJSON.features[i];
 
-      // Handle queries with different capitalization
-      // than the source data by calling toLowerCase().
-
       if (feature.properties.toLowerCase().search(query.toLowerCase()) !== -1) {
-        // Add a tree emoji as a prefix for custom
-        // data results using carmen geojson format:
-        // https://github.com/mapbox/carmen/blob/master/carmen-geojson.md
         feature["place_name"] = "🌱 " + feature.properties;
         feature["center"] = feature.geometry.coordinates;
         feature["place_type"] = ["place"];
@@ -27,7 +21,7 @@ export default function GeocoderControl({ estacionesGeoJSON }) {
     }
     return matchingFeatures;
   }
-  const geocoder = useControl(() => {
+  useControl(() => {
     const ctrl = new MapboxGeocoder({
       accessToken: TOKEN,
       localGeocoder: forwardGeocoder,
@@ -36,7 +30,6 @@ export default function GeocoderControl({ estacionesGeoJSON }) {
       placeholder: "Busque aquí",
       marker: false,
       limit: 10,
-      // enableGeolocation: true,
       clearOnBlur: true,
       clearAndBlurOnEsc: true,
       collapsed: true,

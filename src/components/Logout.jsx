@@ -6,7 +6,6 @@ import { faArrowRightToBracket } from "@fortawesome/free-solid-svg-icons";
 const Logout = () => {
   const cerrar = async () => {
     const URI = "http://localhost:5000/auth/logout";
-    // const res = await axios.get(URI);
     await axios({
       method: "get",
       url: URI,
