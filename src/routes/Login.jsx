@@ -87,7 +87,9 @@ const Login = () => {
                 data-bs-interval="2500"
               >
                 <div className="carousel-caption d-none d-md-block">
-                  <h5 className="fw-bold">Descubre algo sorprendete</h5>
+                  <h5 className="fw-bold text-light">
+                    Vereda San Pablo en el municipio de Pasca.
+                  </h5>
                 </div>
               </div>
               {/* <!--IMAGEN 2--> */}
@@ -145,11 +147,13 @@ const Login = () => {
             <div className={styles["login-box"]}>
               <div className={styles.header}>
                 <img
-                  src="https://zoratamagallery.sfo3.cdn.digitaloceanspaces.com/Utilidades/logo.svg"
+                  src="https://zoratamagallery.sfo3.cdn.digitaloceanspaces.com/Utilidades/logo.png"
                   alt="logo"
                 />
               </div>
-
+              <div className={styles.welcome}>
+                <p>¡Bienvenido de vuelta!</p>
+              </div>
               <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
                 <div className={styles["input-box"]}>
                   <input
@@ -186,16 +190,11 @@ const Login = () => {
                 <Link to="/register">Registrarse</Link>
               </p>
             </div>
-            <div className={styles.app}>
-              <p>Descarga la aplicación.</p>
-              <div className={styles["app-img"]}>
-                <a href="#">
-                  <img src="https://www.instagram.com/static/images/appstore-install-badges/badge_ios_english-en.png/4b70f6fae447.png" />
-                </a>
-                <a href="#">
-                  <img src="https://www.instagram.com/static/images/appstore-install-badges/badge_android_english-en.png/f06b908907d5.png" />
-                </a>
-              </div>
+            <div className={styles.footer}>
+              <p>
+                Copyright <span>Zoratama Map</span> | &#169; 2022 All Rights
+                Reserved
+              </p>
             </div>
           </div>
         </div>
